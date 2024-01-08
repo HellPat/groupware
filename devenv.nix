@@ -15,15 +15,10 @@
       pkgs.just
       pkgs.symfony-cli
       pkgs.coreutils
-      pkgs.phpPackages.phive
-      pkgs.nodePackages.pnpm
+      pkgs.phpPackages.phive # Not used now, but we might use it to install phpunit and others.
+      pkgs.nodePackages.pnpm # not used now, but we might use it to install tailwindcss and others.
+      pkgs.stripe-cli
     ];
-
-    # https://devenv.sh/scripts/
-    enterShell = ''
-      git --version
-      php -v
-    '';
     
     # https://devenv.sh/languages/
     # languages.nix.enable = true;
@@ -43,7 +38,7 @@
     
       ini = ''
         session.cookie_httponly = 1
-        memory_limit = 256m
+        memory_limit = 256mstripe-cli
         xdebug.mode=off
         xdebug.start_with_request=yes
       '';
