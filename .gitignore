@@ -41,3 +41,7 @@ devenv.local.nix
 /bin/rr
 .pid
 ###< baldinof/roadrunner-bundle ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
