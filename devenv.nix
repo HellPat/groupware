@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-    env.APP_ENV = "dev";
-    env.PNPM_HOME = "/.pnpm";
-    env.XDEBUG_MODE = "off";
-    
     dotenv.enable = true;
     difftastic.enable = true;
 
@@ -48,7 +44,7 @@
       ini = ''
         session.cookie_httponly = 1
         memory_limit = 256m
-        xdebug.mode=develop,debug
+        xdebug.mode=off
         xdebug.start_with_request=yes
       '';
     };

@@ -5,13 +5,13 @@ reload:
   services:
     http:
       patterns: [ ".php", ".env", ".env.local", ".yaml", ".yml" ]
-      ignore: [ "var/www/var" ]
+      ignore: [ "var/" ]
 
 server:
   command: "php public/index.php"
   env:
     - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
-    - XDEBUG_SESSION: 1
+    - XDEBUG_MODE: debug,develop
 
 http:
   address: 0.0.0.0:8000
