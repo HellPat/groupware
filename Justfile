@@ -3,6 +3,7 @@ develop:
 
 lint:
     vendor/bin/ecs
+    vendor/bin/psalm
     vendor/bin/phpstan
     
 fix:
