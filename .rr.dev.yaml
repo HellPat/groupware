@@ -1,0 +1,34 @@
+version: "3"
+
+reload:
+  interval: 1s
+  services:
+    http:
+      patterns: [ ".php", ".env", ".env.local", ".yaml", ".yml" ]
+      ignore: [ "var/www/var" ]
+
+server:
+  command: "php public/index.php"
+  env:
+    - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
+    - XDEBUG_SESSION: 1
+
+http:
+  address: 0.0.0.0:8000
+  middleware: [ "gzip" ]
+  http2.h2c: true # https://roadrunner.dev/docs/http-http/current/en#h2c
+  pool:
+    debug: true
+  uploads:
+    forbid: [ ".php", ".exe", ".bat", ".sh" ]
+
+logs:
+  mode: development
+  channels:
+    http:
+      level: info
+    server:
+      level: info # Everything written to worker stderr is logged
+      mode: raw
+    metrics:
+      level: debug

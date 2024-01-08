@@ -23,3 +23,21 @@
 /public/assets/
 /assets/vendor
 ###< symfony/asset-mapper ###
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+
+.pnpm/
+.pnpm-debug.log*
+
+###> baldinof/roadrunner-bundle ###
+/bin/rr
+.pid
+###< baldinof/roadrunner-bundle ###
