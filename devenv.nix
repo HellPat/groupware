@@ -1,7 +1,10 @@
 { pkgs, ... }:
 
 {
-    dotenv.enable = true;
+    # Dotenv integration did not works, so I did this manually in `enterShell`.
+    #dotenv.enable = true;
+    dotenv.disableHint = true;
+    
     difftastic.enable = true;
 
     # https://devenv.sh/packages/
@@ -19,6 +22,13 @@
       pkgs.nodePackages.pnpm # not used now, but we might use it to install tailwindcss and others.
       pkgs.stripe-cli
     ];
+    
+    enterShell = ''
+        source .env
+        echo ".env loaded"
+        jq --version
+        php --version
+    ''; 
     
     # https://devenv.sh/languages/
     # languages.nix.enable = true;
@@ -38,7 +48,7 @@
     
       ini = ''
         session.cookie_httponly = 1
-        memory_limit = 256mstripe-cli
+        memory_limit = 256m
         xdebug.mode=off
         xdebug.start_with_request=yes
       '';
