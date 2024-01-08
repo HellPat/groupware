@@ -13,6 +13,7 @@ return function (ECSConfig $ecsConfig): void {
         __DIR__ . '/public',
         __DIR__ . '/src',
         __DIR__ . '/tests',
+        __DIR__ . '/migrations',
     ]);
 
     // this way you add a single rule
@@ -31,6 +32,6 @@ return function (ECSConfig $ecsConfig): void {
         // SetList::DOCBLOCK,
         // SetList::NAMESPACES,
         // SetList::COMMENTS,
-        // SetList::PSR_12,
+        SetList::PSR_12,
     ]);
 };
