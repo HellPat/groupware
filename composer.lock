@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce522a74c2e06e294ef741390defebbc",
+    "content-hash": "a031873a4e0f03974e8f35fdebb3ed70",
     "packages": [
         {
             "name": "baldinof/roadrunner-bundle",
@@ -6204,71 +6204,6 @@
             "time": "2023-12-15T13:44:59+00:00"
         },
         {
-            "name": "symfony/remote-event",
-            "version": "v7.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/remote-event.git",
-                "reference": "9312fc6509f1db16d72ceb6f30d925baf9385142"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/remote-event/zipball/9312fc6509f1db16d72ceb6f30d925baf9385142",
-                "reference": "9312fc6509f1db16d72ceb6f30d925baf9385142",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/messenger": "^6.4|^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\RemoteEvent\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Eases handling remote events",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "event"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/remote-event/tree/v7.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2023-08-04T11:30:50+00:00"
-        },
-        {
             "name": "symfony/routing",
             "version": "v7.0.2",
             "source": {
@@ -7964,74 +7899,6 @@
                 }
             ],
             "time": "2023-07-25T09:50:29+00:00"
-        },
-        {
-            "name": "symfony/webhook",
-            "version": "v7.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/webhook.git",
-                "reference": "93d114aa583eef35b616d101e381b17e000cb6a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/webhook/zipball/93d114aa583eef35b616d101e381b17e000cb6a0",
-                "reference": "93d114aa583eef35b616d101e381b17e000cb6a0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/http-foundation": "^6.4|^7.0",
-                "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/messenger": "^6.4|^7.0",
-                "symfony/remote-event": "^6.4|^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Webhook\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Eases sending and consuming webhooks",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "webhook"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/webhook/tree/v7.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2023-11-09T21:21:37+00:00"
         },
         {
             "name": "symfony/yaml",

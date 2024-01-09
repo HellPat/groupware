@@ -1,5 +1,0 @@
-framework:
-  webhook:
-    routing:
-      stripe: # this string will be used to build the webhook reception URL
-        service: App\Stripe\RequestParser

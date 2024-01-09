@@ -19,3 +19,8 @@ framework:
 
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
+            
+            # > You may use '*' as the message class. This will act as a default routing rule for any message not matched under routing. This is useful to ensure no message is handled synchronously by default.
+            #   The only drawback is that '*' will also apply to the emails sent with the Symfony Mailer (which uses SendEmailMessage when Messenger is available). This could cause issues if your emails are not serializable (e.g. if they include file attachments as PHP resources/streams).
+            # @see https://symfony.com/doc/current/messenger.html#routing-messages-to-a-transport
+            '*': async
