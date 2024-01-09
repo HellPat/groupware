@@ -112,7 +112,7 @@
         # TODO: rethink limits and restarts.
         #       I set a time limit and a limit of jobs to process, to easy using xdebug.
         #       Xdebug listening must be started in the IDE, and the long running process must be restarted to take effect.
-        command = "symfony run --watch=config,src,templates,vendor symfony console messenger:consume async --limit=10 --time-limit=300 --no-interaction -vv";
+        command = "symfony run --watch=config,src,templates,vendor bin/console messenger:consume async --limit=10 --time-limit=300 --no-interaction -vv";
         availability = {
           restart = "always";
         };
