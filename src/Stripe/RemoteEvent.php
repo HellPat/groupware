@@ -22,14 +22,14 @@ final readonly class RemoteEvent
     {
         WebhookSignature::verifyHeader(
             $request->getContent(),
-            $request->headers->get('Stripe-Signature'),
+            (string) $request->headers->get('Stripe-Signature'),
             $secret
         );
 
         return new self(
             new \DateTimeImmutable(),
-            $request->getPayload()->get('type'),
-            (string) $request->getContent(),
+            (string) $request->getPayload()->get('type'),
+            $request->getContent(),
         );
     }
 }

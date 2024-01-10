@@ -7,6 +7,8 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     findUnusedBaselineEntry="true"
     findUnusedCode="true"
+    findUnusedPsalmSuppress="true"
+    findUnusedVariablesAndParams="true"
 >
     <fileExtensions>
         <extension name=".php" />
@@ -37,4 +39,16 @@
             <containerXml>var/cache/dev/App_KernelDevDebugContainer.xml</containerXml>
         </pluginClass>
     </plugins>
+    
+    <forbiddenFunctions>
+        <function name="dd" />
+        <function name="dump" />
+        <function name="var_dump" />
+        <function name="die" />
+        <function name="sleep" />
+    </forbiddenFunctions>
+    
+    <issueHandlers>
+        <PossiblyUnusedProperty errorLevel="suppress" />
+    </issueHandlers>
 </psalm>
