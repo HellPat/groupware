@@ -2,46 +2,42 @@
 
 namespace App\Stripe;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * @extends ServiceEntityRepository<Customer>
- *
- * @method Customer|null find($id, $lockMode = null, $lockVersion = null)
- * @method Customer|null findOneBy(array $criteria, array $orderBy = null)
- * @method Customer[]    findAll()
- * @method Customer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class CustomerRepository extends ServiceEntityRepository
+final readonly class CustomerRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Customer::class);
+    public function __construct(
+        private EntityManagerInterface $em,
+    ) {
     }
-
-    //    /**
-    //     * @return Customer[] Returns an array of Customer objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Customer
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    
+    public function createOrUpdate(Customer $customer): void
+    {
+        $this->em->getConnection()->executeStatement('
+            INSERT INTO customer 
+                (id, email, name, description, created_at)
+            VALUES (:id, :email, :name, :description, :created_at) 
+            ON DUPLICATE KEY UPDATE
+                email = :email,
+                name = :name,
+                description = :description,
+                created_at = :created_at
+            ',
+            [
+                'id' => $customer->id,
+                'email' => $customer->email,
+                'name' => $customer->name,
+                'description' => $customer->description,
+                'created_at' => $customer->createdAt->format(\DateTimeInterface::RFC3339_EXTENDED),
+            ]
+        );
+    }
+    
+    public function remove(CustomerId $id): void
+    {
+        $this->em->getConnection()->executeStatement(
+            'DELETE FROM customer WHERE id = :id',
+            ['id' => $id->__toString()]
+        );
+    }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 final readonly class RemoteEventHandler
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private CustomerRepository $customers
     ) {
     }
 
@@ -28,7 +28,7 @@ final readonly class RemoteEventHandler
             Event::CUSTOMER_CREATED => $this->createCustomer($action),
             Event::CUSTOMER_DELETED => $this->deleteCustomer($action),
             Event::CUSTOMER_UPDATED => $this->updateCustomer($action),
-            default => throw new UnrecoverableMessageHandlingException('Unknown event type: ' . $action->type),
+            default => null,
         };
     }
 
@@ -40,22 +40,17 @@ final readonly class RemoteEventHandler
 
     private function createCustomer(Event $action): void
     {
-        $this->em->persist(
-            new Customer(
-                $action->data->object->id,
-                $action->data->object->email,
-                $action->data->object->name,
-                $action->data->object->description ?? '',
-                new \DateTimeImmutable('@' . $action->data->object->created),
-            )
-        );
+        $this->customers->createOrUpdate(new Customer(
+            new CustomerId($action->data->object->id),
+            (string) $action->data->object->email,
+            (string) $action->data->object->name,
+            (string) $action->data->object->description,
+            new \DateTimeImmutable('@' . $action->data->object->created)
+        ));
     }
 
     private function deleteCustomer(Event $action): void
     {
-        $this->em->getConnection()->executeStatement(
-            'DELETE FROM customer WHERE id = :id',
-            ['id' => $action->data->object->id]
-        );
+        $this->customers->remove(new CustomerId($action->data->object->id));
     }
 }

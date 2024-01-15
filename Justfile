@@ -1,6 +1,12 @@
 develop:
     devenv up
 
+rebuild:
+    bin/console d:d:d --force
+    bin/console d:d:c --no-interaction
+    bin/console d:m:m --no-interaction
+    bin/console d:s:u --complete --dump-sql
+
 stripe-listen:
     # Write the Stripe signing secret to .env.local, to be used by the webhook handler.
     # TODO: this works but it's not ideal.

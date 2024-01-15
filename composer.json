@@ -7,6 +7,7 @@
         "php": "8.3.*",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "azjezz/psl": "^2.9",
         "baldinof/roadrunner-bundle": "^3.0",
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
