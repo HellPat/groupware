@@ -34,9 +34,9 @@ final class Version20240112145419 extends AbstractMigration
                 INDEX IDX_75EA56E016BA31DB (delivered_at),
                 PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB
         ');
-        
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('
+
+        $this->addSql(
+            '
             CREATE TABLE customer (
                 id VARCHAR(255) NOT NULL,
                 email VARCHAR(320) NOT NULL,
@@ -48,12 +48,20 @@ final class Version20240112145419 extends AbstractMigration
             ) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB'
         );
 
-    }
-
-    public function down(Schema $schema): void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE customer');
-        $this->addSql('DROP TABLE messenger_messages');
+        $this->addSql(
+            '
+            CREATE TABLE subscription (
+                id VARCHAR(255) NOT NULL,
+                customer_id VARCHAR(255) NOT NULL,
+                created_at DATETIME NOT NULL,
+                starts_at DATETIME NOT NULL,
+                cancel_at DATETIME DEFAULT NULL,
+                cancel_at_period_end TINYINT(1) NOT NULL,
+                canceled_at DATETIME DEFAULT NULL,
+                description LONGTEXT NOT NULL,
+                INDEX customer_id (customer_id),
+                PRIMARY KEY(id)
+            ) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB'
+        );
     }
 }

@@ -2,16 +2,15 @@
 
 namespace App\Stripe;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Event;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 
 #[AsMessageHandler]
 final readonly class RemoteEventHandler
 {
     public function __construct(
-        private CustomerRepository $customers
+        private MysqlCustomerRepository $customers,
+        private MysqlSubscriptionRepository $subscriptions,
     ) {
     }
 
@@ -25,20 +24,17 @@ final readonly class RemoteEventHandler
         );
 
         match ($action->type) {
-            Event::CUSTOMER_CREATED => $this->createCustomer($action),
-            Event::CUSTOMER_DELETED => $this->deleteCustomer($action),
-            Event::CUSTOMER_UPDATED => $this->updateCustomer($action),
+            // customer
+            Event::CUSTOMER_CREATED, Event::CUSTOMER_UPDATED => $this->createOrUpdateCustomer($action),
+            Event::CUSTOMER_DELETED => $this->removeCustomer($action),
+            // subscription
+            Event::CUSTOMER_SUBSCRIPTION_CREATED, Event::CUSTOMER_SUBSCRIPTION_UPDATED => $this->createOrUpdateSubscription($action),
+            Event::CUSTOMER_SUBSCRIPTION_DELETED => $this->removeSubscription($action),
             default => null,
         };
     }
 
-    public function updateCustomer(Event $action): void
-    {
-        $this->deleteCustomer($action);
-        $this->createCustomer($action);
-    }
-
-    private function createCustomer(Event $action): void
+    public function createOrUpdateCustomer(Event $action): void
     {
         $this->customers->createOrUpdate(new Customer(
             new CustomerId($action->data->object->id),
@@ -49,8 +45,27 @@ final readonly class RemoteEventHandler
         ));
     }
 
-    private function deleteCustomer(Event $action): void
+    private function removeCustomer(Event $action): void
     {
         $this->customers->remove(new CustomerId($action->data->object->id));
+    }
+
+    private function createOrUpdateSubscription(Event $action): void
+    {
+        $this->subscriptions->createOrUpdate(new Subscription(
+            new SubscriptionId($action->data->object->id),
+            new CustomerId($action->data->object->customer),
+            new \DateTimeImmutable('@' . $action->data->object->created),
+            new \DateTimeImmutable('@' . $action->data->object->start_date),
+            $action->data->object->cancel_at ? new \DateTimeImmutable('@' . $action->data->object->cancel_at) : null,
+            (bool) $action->data->object->cancel_at_period_end,
+            $action->data->object->canceled_at ? new \DateTimeImmutable('@' . $action->data->object->canceled_at) : null,
+            (string) $action->data->object->description,
+        ));
+    }
+
+    private function removeSubscription(Event $action): void
+    {
+        $this->subscriptions->remove(new SubscriptionId($action->data->object->id));
     }
 }

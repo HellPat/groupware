@@ -2,10 +2,10 @@
 
 namespace App\Stripe;
 
-final readonly class CustomerId extends PrefixedId
+final readonly class SubscriptionId extends PrefixedId
 {
     protected static function prefix(): string
     {
-        return 'cus_';
+        return 'sub_';
     }
 }

@@ -15,7 +15,7 @@ stripe-listen:
     #
     #       An other solution could be, to use an API-Token instead.
     echo "STRIPE_SIGNING_SECRET=$(stripe listen --print-secret)" > .env.local
-    stripe listen -s --forward-to localhost:8000/webhook/stripe
+    stripe listen --skip-verify --forward-to localhost:8000/webhook/stripe
 
 lint:
     vendor/bin/ecs

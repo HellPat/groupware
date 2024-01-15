@@ -2,18 +2,19 @@
 
 namespace App\Stripe;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\DBAL\Connection;
 
-final readonly class CustomerRepository
+final readonly class MysqlCustomerRepository
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private Connection $connection,
     ) {
     }
-    
+
     public function createOrUpdate(Customer $customer): void
     {
-        $this->em->getConnection()->executeStatement('
+        $this->connection->executeStatement(
+            '
             INSERT INTO customer 
                 (id, email, name, description, created_at)
             VALUES (:id, :email, :name, :description, :created_at) 
@@ -32,10 +33,10 @@ final readonly class CustomerRepository
             ]
         );
     }
-    
+
     public function remove(CustomerId $id): void
     {
-        $this->em->getConnection()->executeStatement(
+        $this->connection->executeStatement(
             'DELETE FROM customer WHERE id = :id',
             ['id' => $id->__toString()]
         );
