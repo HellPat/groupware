@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\ControlPanel;
 
 use App\Stripe\MysqlCustomerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

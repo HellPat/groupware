@@ -12,6 +12,12 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            
+        </header>
+        <nav>
+            {{ knp_menu_render('main', {'depth': 2, 'currentAsLink': false}) }}
+        </nav>
         {% block body %}
             <main>
                 {% block main %}{% endblock %}
