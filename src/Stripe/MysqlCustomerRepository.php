@@ -41,4 +41,27 @@ final readonly class MysqlCustomerRepository
             ['id' => $id->__toString()]
         );
     }
+
+    /**
+     * @return list<Customer>
+     */
+    public function all(): array
+    {
+        $stmt = $this->connection->executeQuery(
+            'SELECT id,email,name,description,created_at FROM customer'
+        );
+
+        $customers = [];
+        while ($row = $stmt->fetchAssociative()) {
+            $customers[] = new Customer(
+                id: new CustomerId($row['id']),
+                email: $row['email'],
+                name: $row['name'],
+                description: $row['description'],
+                createdAt: new \DateTimeImmutable($row['created_at']),
+            );
+        }
+
+        return $customers;
+    }
 }

@@ -12,6 +12,10 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <main>
+                {% block main %}{% endblock %}
+            </main>
+        {% endblock %}
     </body>
 </html>
