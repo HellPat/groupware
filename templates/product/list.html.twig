@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>Products</h1>
+
+    <table>
+        <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>created_at</th>
+                </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.createdAt|date }}</td>
+                </tr>
+            {% else %}
+                No Products found
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

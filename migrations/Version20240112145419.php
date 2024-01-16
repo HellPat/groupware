@@ -63,5 +63,21 @@ final class Version20240112145419 extends AbstractMigration
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB'
         );
+
+        $this->addSql(
+            '
+            CREATE TABLE product (
+                id VARCHAR(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
+                default_price_id VARCHAR(255),
+                active TINYINT(1) NOT NULL,
+                type VARCHAR(255) NOT NULL,
+                description LONGTEXT NOT NULL,
+                created_at DATETIME NOT NULL,
+                INDEX active (active),
+                INDEX type (type),
+                PRIMARY KEY(id)
+            ) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB'
+        );
     }
 }

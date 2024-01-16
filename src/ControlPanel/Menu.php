@@ -13,12 +13,16 @@ final readonly class Menu
     {
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function main(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root', $options);
 
         $menu->addChild('menu.dashboard', ['route' => DashboardAction::class]);
         $menu->addChild('menu.customers', ['route' => CustomerListAction::class]);
+        $menu->addChild('menu.products', ['route' => ProductListAction::class]);
 
         return $menu;
     }
