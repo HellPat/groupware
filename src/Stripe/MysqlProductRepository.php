@@ -55,13 +55,13 @@ final readonly class MysqlProductRepository
 
         return array_map(
             fn (array $row) => new Product(
-                id: new ProductId($row['id']),
-                name: $row['name'],
-                price: $row['default_price_id'] ? new PriceId($row['default_price_id']) : null,
+                id: new ProductId((string) $row['id']),
+                name: (string) $row['name'],
+                price: $row['default_price_id'] ? new PriceId((string) $row['default_price_id']) : null,
                 active: (bool) $row['active'],
-                createdAt: new \DateTimeImmutable($row['created_at']),
-                type: $row['type'],
-                description: $row['description'],
+                createdAt: new \DateTimeImmutable((string) $row['created_at']),
+                type: (string) $row['type'],
+                description: (string) $row['description'],
             ),
             $rows
         );

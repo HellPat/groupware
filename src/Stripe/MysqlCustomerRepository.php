@@ -54,11 +54,11 @@ final readonly class MysqlCustomerRepository
         $customers = [];
         while ($row = $stmt->fetchAssociative()) {
             $customers[] = new Customer(
-                id: new CustomerId($row['id']),
-                email: $row['email'],
-                name: $row['name'],
-                description: $row['description'],
-                createdAt: new \DateTimeImmutable($row['created_at']),
+                id: new CustomerId((string) $row['id']),
+                email: (string) $row['email'],
+                name: (string) $row['name'],
+                description: (string) $row['description'],
+                createdAt: new \DateTimeImmutable((string) $row['created_at']),
             );
         }
 

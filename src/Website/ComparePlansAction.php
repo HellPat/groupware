@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/pricing', methods: ['GET'])]
 final class ComparePlansAction
 {
-    public function __invoke()
+    public function __invoke(): Response
     {
         return new Response('
             <html>
