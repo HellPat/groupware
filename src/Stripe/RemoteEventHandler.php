@@ -2,9 +2,10 @@
 
 namespace App\Stripe;
 
+use Money\Currency;
+use Money\Money;
 use Stripe\Event;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 
 #[AsMessageHandler]
 final readonly class RemoteEventHandler
@@ -13,6 +14,7 @@ final readonly class RemoteEventHandler
         private MysqlCustomerRepository $customers,
         private MysqlSubscriptionRepository $subscriptions,
         private MysqlProductRepository $products,
+        private MysqlPriceRepository $prices,
     ) {
     }
 
@@ -35,8 +37,11 @@ final readonly class RemoteEventHandler
             // product
             Event::PRODUCT_CREATED, Event::PRODUCT_UPDATED => $this->createOrUpdateProduct($action->data->object),
             Event::PRODUCT_DELETED => $this->removeProduct($action->data->object),
+            // price
+            Event::PRICE_CREATED, Event::PRICE_UPDATED => $this->createOrUpdatePrice($action->data->object),
+            Event::PRICE_DELETED => $this->removePrice($action->data->object),
             // unknown
-            default => throw new UnrecoverableMessageHandlingException('Unknown event type: ' . $action->type),
+            default => null, // throw new UnrecoverableMessageHandlingException('Unknown event type: ' . $action->type),
         };
     }
 
@@ -91,5 +96,23 @@ final readonly class RemoteEventHandler
     private function removeProduct(\Stripe\Product $product): void
     {
         $this->products->remove(new ProductId($product->id));
+    }
+
+    private function removePrice(\Stripe\Price $price): void
+    {
+        $this->prices->remove(new PriceId($price->id));
+    }
+
+    private function createOrUpdatePrice(\Stripe\Price $object): void
+    {
+        // TODO: handle $object->recurring
+        // TODO: why does not handle multiple currencies?
+        $this->prices->createOrUpdate(new Price(
+            new PriceId($object->id),
+            new ProductId($object->product),
+            $object->active,
+            $object->billing_scheme, // TODO: this should be an enum
+            new Money($object->unit_amount, new Currency($object->currency))
+        ));
     }
 }
