@@ -1,11 +1,18 @@
 develop:
     devenv up
 
+build:
+    tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css
+
+watch:
+    tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css --watch
+
 rebuild:
     bin/console d:d:d --force
     bin/console d:d:c --no-interaction
     bin/console d:m:m --no-interaction
     bin/console d:s:u --complete --dump-sql
+    just build
 
 stripe-listen:
     # Write the Stripe signing secret to .env.local, to be used by the webhook handler.

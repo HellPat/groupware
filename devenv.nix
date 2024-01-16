@@ -21,6 +21,7 @@
       pkgs.phpPackages.phive # Not used now, but we might use it to install phpunit and others.
       pkgs.nodePackages.pnpm # not used now, but we might use it to install tailwindcss and others.
       pkgs.stripe-cli
+      pkgs.tailwindcss
     ];
     
     enterShell = ''
@@ -109,17 +110,17 @@
       };
   };
   processes.symfony-message-consumer.process-compose = {
-        # TODO: rethink limits and restarts.
-        #       I set a time limit and a limit of jobs to process, to easy using xdebug.
-        #       Xdebug listening must be started in the IDE, and the long running process must be restarted to take effect.
-        command = "symfony run --watch=config,src,templates,vendor bin/console messenger:consume async --limit=10 --time-limit=300 --no-interaction -vv";
-        availability = {
-          restart = "always";
-        };
-        depends_on = {
-          symfony = {
-              condition = "process_started";
-          };
-        };
+    # TODO: rethink limits and restarts.
+    #       I set a time limit and a limit of jobs to process, to easy using xdebug.
+    #       Xdebug listening must be started in the IDE, and the long running process must be restarted to take effect.
+    command = "symfony run --watch=config,src,templates,vendor bin/console messenger:consume async --limit=10 --time-limit=300 --no-interaction -vv";
+    availability = {
+      restart = "always";
     };
+    depends_on = {
+      symfony = {
+          condition = "process_started";
+      };
+    };
+  };
 }
