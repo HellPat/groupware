@@ -87,12 +87,20 @@
     
     # https://devenv.sh/processes/
     process.implementation = "overmind";
+    # Write the Stripe signing secret to .env.local, to be used by the webhook handler.
+    # TODO: this works but it's not ideal.
+    #       The file is overwritten every time the command is run,
+    #       we should instead add or replace only the STRIPE_SIGNING_SECRET line.
+    #
+    #       An other solution could be, to use an API-Token instead.
+    process.before = "echo \"STRIPE_SIGNING_SECRET=$(stripe listen --print-secret)\" > .env.local";
     processes = {
         symfony.exec = "rr serve -p -c .rr.dev.yaml --debug";
         # TODO: rethink limits and restarts.
         #       I set a time limit and a limit of jobs to process, to easy using xdebug.
         #       Xdebug listening must be started in the IDE, and the long running process must be restarted to take effect.
         symfony-message-consumer.exec = "symfony run --watch=config,src,vendor bin/console messenger:consume async --limit=10 --time-limit=300 --no-interaction -vv";
+        stripe.exec = "stripe listen --skip-verify --forward-to localhost:8000/webhook/stripe";
         tailwindcss.exec = "tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css --watch";
     };
 }

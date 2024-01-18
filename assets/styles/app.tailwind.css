@@ -572,9 +572,9 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.bg-blue-200 {
+.bg-slate-300 {
   --tw-bg-opacity: 1;
-  background-color: rgb(191 219 254 / var(--tw-bg-opacity));
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
 .filter {
