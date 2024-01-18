@@ -4,9 +4,6 @@ develop:
 build:
     tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css
 
-watch:
-    tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css --watch
-
 rebuild:
     bin/console d:d:d --force
     bin/console d:d:c --no-interaction

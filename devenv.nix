@@ -50,7 +50,7 @@
       ini = ''
         session.cookie_httponly = 1
         memory_limit = 256m
-        xdebug.mode=off
+        xdebug.mode=debug,develop
         xdebug.start_with_request=yes
       '';
     };
@@ -86,41 +86,13 @@
     };
     
     # https://devenv.sh/processes/
-    process.implementation = "process-compose";
-    processes.symfony.process-compose = {
-      command = "rr serve -p -c .rr.dev.yaml --debug";
-      availability = {
-        backoff_seconds = 2;
-        max_restarts = 5;
-        restart = "always";
-      };
-      depends_on = {
-        mysql = {
-            condition = "process_started";
-        };
-        redis = {
-            condition = "process_started";
-        };
-      };
-      readiness_probe = {
-        http_get = {
-          port = 8000;
-          path = "/.well-known/ready";
-        };
-      };
-  };
-  processes.symfony-message-consumer.process-compose = {
-    # TODO: rethink limits and restarts.
-    #       I set a time limit and a limit of jobs to process, to easy using xdebug.
-    #       Xdebug listening must be started in the IDE, and the long running process must be restarted to take effect.
-    command = "symfony run --watch=config,src,templates,vendor bin/console messenger:consume async --limit=10 --time-limit=300 --no-interaction -vv";
-    availability = {
-      restart = "always";
+    process.implementation = "overmind";
+    processes = {
+        symfony.exec = "rr serve -p -c .rr.dev.yaml --debug";
+        # TODO: rethink limits and restarts.
+        #       I set a time limit and a limit of jobs to process, to easy using xdebug.
+        #       Xdebug listening must be started in the IDE, and the long running process must be restarted to take effect.
+        symfony-message-consumer.exec = "symfony run --watch=config,src,vendor bin/console messenger:consume async --limit=10 --time-limit=300 --no-interaction -vv";
+        tailwindcss.exec = "tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css --watch";
     };
-    depends_on = {
-      symfony = {
-          condition = "process_started";
-      };
-    };
-  };
 }
