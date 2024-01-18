@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+# TODO: Run an own nix-shell to avoid limitations.
+#       I want to have the env versioned, but run the processes manually,
+#       to profit from the plain documentations of the tools.
 {
     # Dotenv integration did not works, so I did this manually in `enterShell`.
     #dotenv.enable = true;
