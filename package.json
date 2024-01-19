@@ -1,0 +1,7 @@
+{
+	"devDependencies": {
+		"cypress": "^13.6.3",
+		"stripe": "^14.13.0",
+		"ulid": "^2.3.0"
+	}
+}
