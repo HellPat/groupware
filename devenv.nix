@@ -22,7 +22,7 @@
       pkgs.symfony-cli
       pkgs.coreutils
       pkgs.phpPackages.phive # Not used now, but we might use it to install phpunit and others.
-      pkgs.nodePackages.pnpm # not used now, but we might use it to install tailwindcss and others.
+      pkgs.nodePackages.pnpm
       pkgs.stripe-cli
       pkgs.tailwindcss
     ];
