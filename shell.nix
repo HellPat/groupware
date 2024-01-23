@@ -1,5 +1,9 @@
 {
-    pkgs ? import <nixpkgs> {},
+    # Pinning packages with URLs inside a Nix expression
+    # https://nix.dev/tutorials/first-steps/towards-reproducibility-pinning-nixpkgs#pinning-packages-with-urls-inside-a-nix-expression
+    # Picking the commit can be done via https://status.nixos.org,
+    # which lists all the releases and the latest commit that has passed all tests.
+    pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/d7f206b723e42edb09d9d753020a84b3061a79d8.tar.gz") {},
     php ? pkgs.php83.buildEnv {
       extensions = ({ enabled, all }: enabled ++ (with all; [
           redis
