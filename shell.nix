@@ -25,8 +25,11 @@ pkgs.mkShell {
         pkgs.vim
         pkgs.which
         pkgs.coreutils
+        pkgs.overmind
         php
+        pkgs.php83Packages.composer
         pkgs.git
+        pkgs.openssh
         pkgs.jq
         pkgs.roadrunner
         pkgs.gh
@@ -38,11 +41,24 @@ pkgs.mkShell {
         pkgs.stripe-cli
         pkgs.tailwindcss
         pkgs.process-compose
+        pkgs.mysql80
+        pkgs.hostname
+        pkgs.redis
     ];
     
-    GIT_EDITOR = "${pkgs.vim}/bin/vi";
+    # TODO: configure dynamically to use the current directory
+    MYSQL_HOME= "/home/pheller/Code/groupware/storage/mysql";
+    MYSQL_DATADIR = "/home/pheller/Code/groupware/storage/mysql/data";
+    MYSQL_UNIX_PORT = "/home/pheller/Code/groupware/.mysql.sock";
+    MYSQLX_UNIX_PORT = "/home/pheller/Code/groupware/.mysqlx.sock";
+    
+    REDIS_DATADIR = "/home/pheller/Code/groupware/storage/redis/data";
+    REDIS_PID = "/home/pheller/Code/groupware/.redis.pid";
+    REDIS_SOCKET = "/home/pheller/Code/groupware/.redis.sock";
     
     shellHook = ''
+        redis-server -v
+        mysql --version
         git --version
         php -v
         composer --version
