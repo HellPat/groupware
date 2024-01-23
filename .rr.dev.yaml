@@ -4,8 +4,10 @@ reload:
   interval: 1s
   services:
     http:
-      patterns: [ ".php", ".env", ".env.local", ".yaml", ".yml" ]
+      dirs: [""]
       ignore: [ "var/" ]
+      patterns: [ ".php", ".env", ".env.local", ".yaml", ".yml" ]
+      recursive: true
 
 server:
   command: "php public/index.php"
@@ -23,6 +25,8 @@ http:
 
 logs:
   mode: development
+  level: debug
+  encoding: json
   channels:
     http:
       level: info

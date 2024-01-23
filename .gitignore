@@ -46,5 +46,9 @@ devenv.local.nix
 phpstan.neon
 ###< phpstan/phpstan ###
 
-docker/
+storage/mysql/data
+storage/redis/data
+*.sock
+*.sock.lock
+*.pid
 node_modules/
