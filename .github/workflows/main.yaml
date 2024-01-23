@@ -1,0 +1,13 @@
+name: Tests
+
+on:
+  push:
+
+jobs:
+  psalm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v22
+      # TODO: check why --ignore-platform-req=ext-redis is needed
+      - run: nix-shell --pure --run "composer install --ignore-platform-req=ext-redis && vendor/bin/psalm --output-format=github"
