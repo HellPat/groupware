@@ -36,3 +36,4 @@ lint:
     
 fix:
     vendor/bin/ecs --fix
+    just --fmt --unstable

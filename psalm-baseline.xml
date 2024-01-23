@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files
+  psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4"
+  php-version="
+    php:8.3.2;
+    apcu:5.1.23;
+    bcmath:8.3.2;
+    calendar:8.3.2;
+    Core:8.3.2;
+    ctype:8.3.2;
+    curl:8.3.2;
+    date:8.3.2;
+    dom:20031129;
+    exif:8.3.2;
+    fileinfo:8.3.2;
+    filter:8.3.2;
+    ftp:8.3.2;
+    gd:8.3.2;
+    gettext:8.3.2;
+    gmp:8.3.2;
+    hash:8.3.2;
+    iconv:8.3.2;
+    imap:8.3.2;
+    intl:8.3.2;
+    json:8.3.2;
+    ldap:8.3.2;
+    libxml:8.3.2;
+    mbstring:8.3.2;
+    mysqli:8.3.2;
+    mysqlnd:mysqlnd 8.3.2;
+    openssl:8.3.2;
+    pcntl:8.3.2;
+    pcre:8.3.2;
+    PDO:8.3.2;
+    pdo_mysql:8.3.2;
+    PDO_ODBC:8.3.2;
+    pdo_pgsql:8.3.2;
+    pdo_sqlite:8.3.2;
+    pgsql:8.3.2;
+    Phar:8.3.2;
+    posix:8.3.2;
+    random:8.3.2;
+    readline:8.3.2;
+    redis:6.0.2;
+    Reflection:8.3.2;
+    session:8.3.2;
+    SimpleXML:8.3.2;
+    soap:8.3.2;
+    sockets:8.3.2;
+    sodium:8.3.2;
+    SPL:8.3.2;
+    sqlite3:8.3.2;
+    standard:8.3.2;
+    sysvsem:8.3.2;
+    tokenizer:8.3.2;
+    xml:8.3.2;
+    xmlreader:8.3.2;
+    xmlwriter:8.3.2;
+    Zend OPcache:8.3.2;
+    Zend OPcache:8.3.2;
+    zip:1.22.3;
+    zlib:8.3.2
+  "
+>
+  <file src="src/Stripe/RemoteEventHandler.php">
+    <MixedMethodCall>
+      <code>__invoke</code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/Stripe/UpdateProduct.php">
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$product->default_price]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Stripe/UpdateSubscription.php">
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$subscription->cancel_at]]></code>
+      <code><![CDATA[$subscription->canceled_at]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+</files>

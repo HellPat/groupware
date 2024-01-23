@@ -2,12 +2,38 @@ name: Tests
 
 on:
   push:
-
+  merge_group:
 jobs:
+  style:
+    runs-on: ubuntu-latest
+    defaults: 
+        run:
+            shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v22
+      - run: composer install --ignore-platform-req=ext-redis
+      - run: vendor/bin/ecs
+        
   psalm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v22
       # TODO: check why --ignore-platform-req=ext-redis is needed
-      - run: nix-shell --pure --run "composer install --ignore-platform-req=ext-redis && vendor/bin/psalm --output-format=github"
+      - shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+        run: |
+          composer install --ignore-platform-req=ext-redis
+          vendor/bin/psalm --output-format=github
+        
+  phpunit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v22
+      # TODO: cache the build
+      - shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+        run: |
+            # TODO: check why --ignore-platform-req=ext-redis is needed
+            composer install --ignore-platform-req=ext-redis
+            XDEBUG_MODE=coverage vendor/bin/phpunit --order-by=random --stop-on-error --stop-on-failure

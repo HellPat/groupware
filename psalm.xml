@@ -9,6 +9,8 @@
     findUnusedCode="true"
     findUnusedPsalmSuppress="true"
     findUnusedVariablesAndParams="true"
+    errorBaseline="psalm-baseline.xml"
+    includePhpVersionsInErrorBaseline="true"
 >
     <fileExtensions>
         <extension name=".php" />
