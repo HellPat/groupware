@@ -63,8 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v25
-      - run: composer install --ignore-platform-req=ext-redis
-      - run: bin/console cache:warmup
+      - run: echo $TMPDIR
       - run: just build
       - run: overmind start -D
       - run: bin/console doctrine:database:create --if-not-exists --no-interaction

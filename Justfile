@@ -4,12 +4,10 @@ develop:
 build:
     #!/usr/bin/env bash
     set -euxo pipefail
-    # initialize mysql when the directory does not exist
-    if [ ! -d $MYSQL_DATADIR ]; then
-      mkdir -p ${MYSQL_DATADIR}
-      mysqld --datadir=${MYSQL_DATADIR} --initialize
-    fi
-    echo "STRIPE_SIGNING_SECRET=$(stripe listen --print-secret)" > .env.local
+    ${MYSQL_HOME}/init.sh
+    echo "STRIPE_SIGNING_SECRET=\"$(stripe listen --print-secret)\"" > .env.local
+    composer install --ignore-platform-req=ext-redis
+    bin/console cache:warmup
     tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css
 
 rebuild:

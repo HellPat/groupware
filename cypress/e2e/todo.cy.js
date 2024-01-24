@@ -33,6 +33,6 @@ describe('customers', () => {
     cy.reload()
 
     // check if the email address is visible in the list of customers
-    cy.get('[data-test="customer.list"] tbody > tr', { timeout: 10000 }).contains(email)
+    cy.get('[data-test="customer.list"] tbody > tr').contains(email)
   })
 })
