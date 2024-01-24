@@ -1,5 +1,8 @@
 name: Tests
 
+# Todo: try `nektos/act` to run the suite locally
+#       This might avoid duplication and make Justfile obsolete
+#       https://github.com/nektos/act
 on:
   push:
   merge_group:
@@ -15,6 +18,7 @@ jobs:
         matrix:
             check:
               - vendor/bin/psalm --output-format=github
+              - vendor/bin/phpstan --error-format=github
               - vendor/bin/ecs
               - bin/console lint:twig templates --no-interaction --format=github
               - bin/console lint:yaml . *.yaml --parse-tags --no-interaction --format=github

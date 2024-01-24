@@ -1,0 +1,41 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 5
+			path: src/Stripe/MysqlCustomerRepository.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 6
+			path: src/Stripe/MysqlProductRepository.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:__invoke\\(\\)\\.$#"
+			count: 1
+			path: src/Stripe/RemoteEventHandler.php
+
+		-
+			message: "#^Method App\\\\Stripe\\\\RemoteEventHandler\\:\\:__construct\\(\\) has parameter \\$handlers with no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Stripe/RemoteEventHandler.php
+
+		-
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/UpdateCustomer.php
+
+		-
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/UpdatePrice.php
+
+		-
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/UpdateProduct.php
+
+		-
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/UpdateSubscription.php
