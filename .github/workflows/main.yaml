@@ -1,0 +1,61 @@
+name: Tests
+
+on:
+  push:
+  merge_group:
+jobs:
+  style:
+    runs-on: ubuntu-latest
+    defaults: 
+        run:
+            shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v22
+      - run: composer install --ignore-platform-req=ext-redis
+      - run: vendor/bin/ecs
+      - run: bin/console cache:warmup
+      - run: bin/console lint:twig templates -n --format=github
+      - run: composer validate composer.json --no-check-publish
+      - run: symfony security:check
+#      symfony security:check
+#      vendor/bin/parallel-lint src public migrations config
+#      composer validate composer.json --no-check-publish
+#      XDEBUG_MODE=off bin/composer-require-checker --no-interaction --config-file=$PWD/composer-require-checker.json
+#      vendor/bin/config-transformer --dry-run
+#      bin/console lint:container -n
+#      bin/console cache:warmup
+#      bin/console lint:twig templates -n {{ if output == "github" { "--format=github" } else { "" } }}
+#      bin/console lint:yaml . *.yaml --parse-tags -n {{ if output == "github" { "--format=github" } else { "" } }}
+#      bin/console debug:translation --all --only-missing en
+#      bin/console lint:xliff translations --no-interaction {{ if output == "github" { "--format=github" } else { "" } }}
+#      vendor/bin/rector --dry-run
+#      vendor/bin/php-cs-fixer fix --dry-run --diff
+#      vendor/bin/psalm {{ if output == "github" { "--output-format=github" } else { "" } }}
+#      vendor/bin/phpstan -v --memory-limit=1G {{ if output == "github" { "--error-format=github" } else { "" } }}
+#      cd .. && pnpm spectral lint openapi.yaml {{ if output == "github" { "--format=github-actions" } else { "" } }}
+        
+  psalm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v22
+      - shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+        run: |
+          # TODO: cache composer dependencies
+          # TODO: check why --ignore-platform-req=ext-redis is needed
+          composer install --ignore-platform-req=ext-redis
+          vendor/bin/psalm --output-format=github
+        
+  phpunit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v22
+      # TODO: cache the build
+      - shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+        run: |
+            # TODO: cache composer dependencies
+            # TODO: check why --ignore-platform-req=ext-redis is needed
+            composer install --ignore-platform-req=ext-redis
+            XDEBUG_MODE=coverage vendor/bin/phpunit --order-by=random --stop-on-error --stop-on-failure
