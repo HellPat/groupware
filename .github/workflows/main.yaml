@@ -55,3 +55,20 @@ jobs:
             # TODO: check why --ignore-platform-req=ext-redis is needed
             composer install --ignore-platform-req=ext-redis
             XDEBUG_MODE=coverage vendor/bin/phpunit --order-by=random --stop-on-error --stop-on-failure
+  functional-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v25
+      - run: composer install --ignore-platform-req=ext-redis
+      - run: bin/console cache:warmup
+      - run: just build
+      - run: overmind start -D
+      - run: bin/console doctrine:database:create --if-not-exists --no-interaction
+      - run: bin/console doctrine:migrations:migrate --all-or-nothing --allow-no-migration --no-interaction
+      # TODO: publish the results
+      - run: pnpm cypress run --record --parallel --ci-build-id
+        
