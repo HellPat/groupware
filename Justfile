@@ -30,7 +30,7 @@ stripe-listen:
     stripe listen --skip-verify --forward-to localhost:8000/webhook/stripe
 
 lint:
-    vendor/bin/psalmsymfony nix-shell
+    vendor/bin/psalm
     vendor/bin/phpstan
     vendor/bin/ecs
     

@@ -15,6 +15,7 @@ jobs:
         matrix:
             check:
               - vendor/bin/psalm --output-format=github
+              - vendor/bin/phpstan --error-format=github
               - vendor/bin/ecs
               - bin/console lint:twig templates --no-interaction --format=github
               - bin/console lint:yaml . *.yaml --parse-tags --no-interaction --format=github
