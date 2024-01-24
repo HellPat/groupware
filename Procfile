@@ -1,7 +1,7 @@
 # TODO: handle dependencies between services by using a wait-for.sh script.
 
 mysql: mysqld --datadir=${MYSQL_DATADIR} --init-file=${MYSQL_HOME}/init.sql --skip-networking
-redis: redis-server storage/redis/redis.conf
+redis: envsubst < storage/redis/redis.conf | redis-server -
 symfony: rr serve -p -c .rr.dev.yaml --debug
 
 # TODO: rethink limits and restarts.

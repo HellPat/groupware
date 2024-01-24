@@ -48,19 +48,17 @@ pkgs.mkShell {
         pkgs.mysql80
         pkgs.hostname
         pkgs.redis
+        pkgs.envsubst
     ];
     
-    # TODO: configure dynamically to use the current directory
-    MYSQL_HOME= "/home/pheller/Code/groupware/storage/mysql";
-    MYSQL_DATADIR = "/home/pheller/Code/groupware/storage/mysql/data";
-    MYSQL_UNIX_PORT = "/home/pheller/Code/groupware/.mysql.sock";
-    MYSQLX_UNIX_PORT = "/home/pheller/Code/groupware/.mysqlx.sock";
-    
-    REDIS_DATADIR = "/home/pheller/Code/groupware/storage/redis/data";
-    REDIS_PID = "/home/pheller/Code/groupware/.redis.pid";
-    REDIS_SOCKET = "/home/pheller/Code/groupware/.redis.sock";
-    
     shellHook = ''
+        export MYSQL_HOME=''${PWD}/storage/mysql
+        export MYSQL_DATADIR=''${PWD}/storage/mysql/data
+        export MYSQL_UNIX_PORT=''${PWD}/.mysql.sock
+        export MYSQLX_UNIX_PORT=''${PWD}/.mysqlx.sock
+        export REDIS_DATADIR=''${PWD}/storage/redis/data
+        export REDIS_PID=''${PWD}/.redis.pid
+        export REDIS_SOCKET=''${PWD}/.redis.sock
         redis-server -v
         mysql --version
         git --version
