@@ -1,5 +1,5 @@
 {
-	"packageManager": "pnpm@8.14.0",
+	"packageManager": "pnpm@8.14.3",
 	"devDependencies": {
 		"cypress": "^13.6.3",
 		"stripe": "^14.13.0",
