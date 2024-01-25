@@ -13,13 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
 #[Route('webhook/stripe', name: 'stripe_webhook', methods: ['POST'])]
-final class WebhookAction
+final readonly class RemoteEventAction
 {
     public function __construct(
         #[Autowire(env: 'STRIPE_SIGNING_SECRET')]
         #[\SensitiveParameter]
-        private readonly string $secret,
-        private readonly MessageBusInterface $messageBus,
+        private string              $secret,
+        private MessageBusInterface $messageBus,
     ) {
     }
 

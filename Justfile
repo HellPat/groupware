@@ -36,7 +36,7 @@ lint:
     vendor/bin/psalm
     vendor/bin/phpstan
     vendor/bin/ecs
-    
+
 fix:
     vendor/bin/ecs --fix
     just --fmt --unstable

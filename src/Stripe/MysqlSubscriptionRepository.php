@@ -3,15 +3,17 @@
 namespace App\Stripe;
 
 use Doctrine\DBAL\Connection;
+use Stripe\Event;
+use Webmozart\Assert\Assert;
 
-final readonly class MysqlSubscriptionRepository
+final readonly class MysqlSubscriptionRepository implements StripeEventAware
 {
     public function __construct(
         private Connection $connection,
     ) {
     }
 
-    public function createOrUpdate(Subscription $subscription): void
+    private function createOrUpdate(Subscription $subscription): void
     {
         $this->connection->executeStatement(
             '
@@ -38,11 +40,48 @@ final readonly class MysqlSubscriptionRepository
         );
     }
 
-    public function remove(SubscriptionId $id): void
+    private function remove(SubscriptionId $id): void
     {
         $this->connection->executeStatement(
             'DELETE FROM subscription WHERE id = :id',
             ['id' => $id->__toString()]
         );
+    }
+
+    private static function extract(Event $event): \Stripe\Subscription
+    {
+        /** @psalm-suppress UndefinedMagicPropertyFetch */
+        $obj = $event->data->object;
+        Assert::isInstanceOf($obj, \Stripe\Subscription::class);
+
+        return $obj;
+    }
+
+    public function handleStripeEvent(Event $event): void
+    {
+        match ($event->type) {
+            Event::CUSTOMER_SUBSCRIPTION_CREATED, Event::CUSTOMER_SUBSCRIPTION_UPDATED => $this->createOrUpdateSubscription(self::extract($event)),
+            Event::CUSTOMER_SUBSCRIPTION_DELETED => $this->removeSubscription(self::extract($event)),
+            default => null,
+        };
+    }
+
+    private function createOrUpdateSubscription(\Stripe\Subscription $subscription): void
+    {
+        $this->createOrUpdate(new Subscription(
+            new SubscriptionId($subscription->id),
+            new CustomerId((string) $subscription->customer),
+            new \DateTimeImmutable('@' . $subscription->created),
+            new \DateTimeImmutable('@' . $subscription->start_date),
+            $subscription->cancel_at ? new \DateTimeImmutable('@' . $subscription->cancel_at) : null,
+            $subscription->cancel_at_period_end,
+            $subscription->canceled_at ? new \DateTimeImmutable('@' . $subscription->canceled_at) : null,
+            (string) $subscription->description,
+        ));
+    }
+
+    private function removeSubscription(\Stripe\Subscription $subscription): void
+    {
+        $this->remove(new SubscriptionId($subscription->id));
     }
 }

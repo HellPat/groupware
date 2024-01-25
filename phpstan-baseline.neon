@@ -1,9 +1,24 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/MysqlCustomerRepository.php
+
+		-
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 5
 			path: src/Stripe/MysqlCustomerRepository.php
+
+		-
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/MysqlPriceRepository.php
+
+		-
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/MysqlProductRepository.php
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
@@ -11,7 +26,12 @@ parameters:
 			path: src/Stripe/MysqlProductRepository.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:__invoke\\(\\)\\.$#"
+			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
+			count: 1
+			path: src/Stripe/MysqlSubscriptionRepository.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:handleStripeEvent\\(\\)\\.$#"
 			count: 1
 			path: src/Stripe/RemoteEventHandler.php
 
@@ -19,23 +39,3 @@ parameters:
 			message: "#^Method App\\\\Stripe\\\\RemoteEventHandler\\:\\:__construct\\(\\) has parameter \\$handlers with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Stripe/RemoteEventHandler.php
-
-		-
-			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
-			count: 1
-			path: src/Stripe/UpdateCustomer.php
-
-		-
-			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
-			count: 1
-			path: src/Stripe/UpdatePrice.php
-
-		-
-			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
-			count: 1
-			path: src/Stripe/UpdateProduct.php
-
-		-
-			message: "#^Access to an undefined property Stripe\\\\StripeObject\\:\\:\\$object\\.$#"
-			count: 1
-			path: src/Stripe/UpdateSubscription.php

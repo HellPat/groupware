@@ -3,15 +3,17 @@
 namespace App\Stripe;
 
 use Doctrine\DBAL\Connection;
+use Stripe\Event;
+use Webmozart\Assert\Assert;
 
-final readonly class MysqlCustomerRepository
+final readonly class MysqlCustomerRepository implements StripeEventAware
 {
     public function __construct(
         private Connection $connection,
     ) {
     }
 
-    public function createOrUpdate(Customer $customer): void
+    private function createOrUpdate(Customer $customer): void
     {
         $this->connection->executeStatement(
             '
@@ -34,7 +36,7 @@ final readonly class MysqlCustomerRepository
         );
     }
 
-    public function remove(CustomerId $id): void
+    private function remove(CustomerId $id): void
     {
         $this->connection->executeStatement(
             'DELETE FROM customer WHERE id = :id',
@@ -63,5 +65,39 @@ final readonly class MysqlCustomerRepository
         }
 
         return $customers;
+    }
+
+    private static function extract(Event $event): \Stripe\Customer
+    {
+        /** @psalm-suppress UndefinedMagicPropertyFetch */
+        $obj = $event->data->object;
+        Assert::isInstanceOf($obj, \Stripe\Customer::class);
+
+        return $obj;
+    }
+
+    public function handleStripeEvent(Event $event): void
+    {
+        match ($event->type) {
+            Event::CUSTOMER_CREATED, Event::CUSTOMER_UPDATED => $this->createOrUpdateCustomer(self::extract($event)),
+            Event::CUSTOMER_DELETED => $this->removeCustomer(self::extract($event)),
+            default => null,
+        };
+    }
+
+    private function createOrUpdateCustomer(\Stripe\Customer $customer): void
+    {
+        $this->createOrUpdate(new Customer(
+            new CustomerId($customer->id),
+            (string) $customer->email,
+            (string) $customer->name,
+            (string) $customer->description,
+            new \DateTimeImmutable('@' . $customer->created)
+        ));
+    }
+
+    private function removeCustomer(\Stripe\Customer $customer): void
+    {
+        $this->remove(new CustomerId($customer->id));
     }
 }
