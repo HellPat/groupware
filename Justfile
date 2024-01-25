@@ -1,33 +1,36 @@
+start-background:
+    overmind start -D
+
 develop:
     overmind start
 
-build:
+setup:
+    just setup-backend
+    just setup-database
+    just setup-frontend
+    just setup-stripe
+
+setup-database:
     #!/usr/bin/env bash
     set -euxo pipefail
-    # initialize mysql when the directory does not exist
-    if [ ! -d $MYSQL_DATADIR ]; then
-      mkdir -p ${MYSQL_DATADIR}
-      mysqld --datadir=${MYSQL_DATADIR} --initialize
-    fi
-    echo "STRIPE_SIGNING_SECRET=$(stripe listen --print-secret)" > .env.local
+    ${MYSQL_HOME}/init.sh
+
+setup-backend:
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    composer install --ignore-platform-req=ext-redis
+    bin/console cache:warmup
+
+setup-frontend:
+    #!/usr/bin/env bash
+    set -euxo pipefail
     tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css
 
-rebuild:
-    bin/console d:d:d --force
-    bin/console d:d:c --no-interaction
-    bin/console d:m:m --no-interaction
-    bin/console d:s:u --complete --dump-sql
-    just build
-
-stripe-listen:
-    # Write the Stripe signing secret to .env.local, to be used by the webhook handler.
-    # TODO: this works but it's not ideal.
-    #       The file is overwritten every time the command is run,
-    #       we should instead add or replace only the STRIPE_SIGNING_SECRET line.
-    #
-    #       An other solution could be, to use an API-Token instead.
+setup-stripe:
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    # TODO: secret should not rely on a file
     echo "STRIPE_SIGNING_SECRET=$(stripe listen --print-secret)" > .env.local
-    stripe listen --skip-verify --forward-to localhost:8000/webhook/stripe
 
 lint:
     vendor/bin/psalm
