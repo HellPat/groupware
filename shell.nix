@@ -52,6 +52,7 @@ pkgs.mkShell {
     ];
     
     shellHook = ''
+        export OVERMIND_AUTO_RESTART=all
         export MYSQL_HOME=''${PWD}/storage/mysql
         export MYSQL_DATADIR=''${PWD}/storage/mysql/data
         export MYSQL_UNIX_PORT=''${PWD}/.mysql.sock

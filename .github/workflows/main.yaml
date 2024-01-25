@@ -72,13 +72,7 @@ jobs:
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+      # TODO: add cache for node_modules
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
       - shell: nix-shell --pure --run "bash -euxo pipefail {0}"

@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import Stripe from 'stripe';
 import { ulid } from 'ulid';
+import 'cypress-recurse/commands'
 
 // TODO: move to environment variable
 // set your api key with an environment variable `CYPRESS_API_KEY` or configure using `env` property in config file
@@ -21,18 +22,23 @@ describe('customers', () => {
   
   it('it adds new stripe users to the list', async () => {
     const email = `customer-${ulid()}@e2e.com`;
-    const customer = (await stripe.customers.create({
+    await stripe.customers.create({
       email: email,
-    }))
-    
-    const id = customer.id;
+    })
 
-    // TODO: retry the reload until it's there
-    //       waiting is bad, as it slows down the tests
-    cy.wait(5000)
-    cy.reload()
-
-    // check if the email address is visible in the list of customers
-    cy.get('[data-test="customer.list"] tbody > tr').contains(email)
+    cy.recurse(
+        () => cy.get(`[data-test-customer-email="${email}"]`).should(Cypress._.noop),
+        (el) => {
+            return el && el.text() === email
+        },
+        {
+            limit: 10,
+            delay: 2000, // sleep for 2 second before reloading the page
+            timeout: 60000, // retry for 60 seconds
+            post: () => {
+                cy.reload()
+            },
+        },
+    )
   })
 })

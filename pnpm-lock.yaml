@@ -8,6 +8,9 @@ devDependencies:
   cypress:
     specifier: ^13.6.3
     version: 13.6.3
+  cypress-recurse:
+    specifier: ^1.35.2
+    version: 1.35.2
   stripe:
     specifier: ^14.13.0
     version: 14.13.0
@@ -304,6 +307,12 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+    dev: true
+
+  /cypress-recurse@1.35.2:
+    resolution: {integrity: sha512-G6HfxP90xa7phw8oeOX4uabxcI9gE1ktkKHShcA3nCByrkMLs56+GIJVn0A+ws1tI0PGRKBz6+V9DHS5WnZX4A==}
+    dependencies:
+      humanize-duration: 3.31.0
     dev: true
 
   /cypress@13.6.3:
@@ -625,6 +634,10 @@ packages:
   /human-signals@1.1.1:
     resolution: {integrity: sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==}
     engines: {node: '>=8.12.0'}
+    dev: true
+
+  /humanize-duration@3.31.0:
+    resolution: {integrity: sha512-fRrehgBG26NNZysRlTq1S+HPtDpp3u+Jzdc/d5A4cEzOD86YLAkDaJyJg8krSdCi7CJ+s7ht3fwRj8Dl+Btd0w==}
     dev: true
 
   /ieee754@1.2.1:
