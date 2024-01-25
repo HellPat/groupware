@@ -3,14 +3,16 @@
 namespace App\Stripe;
 
 use Doctrine\DBAL\Connection;
+use Stripe\Event;
+use Webmozart\Assert\Assert;
 
-final readonly class MysqlProductRepository
+final readonly class MysqlProductRepository implements StripeEventAware
 {
     public function __construct(private Connection $connection)
     {
     }
 
-    public function createOrUpdate(Product $product): void
+    private function createOrUpdate(Product $product): void
     {
         $this->connection->executeStatement(
             '
@@ -36,7 +38,7 @@ final readonly class MysqlProductRepository
         );
     }
 
-    public function remove(ProductId $id): void
+    private function remove(ProductId $id): void
     {
         $this->connection->executeStatement(
             'DELETE FROM product WHERE id = :id',
@@ -65,5 +67,41 @@ final readonly class MysqlProductRepository
             ),
             $rows
         );
+    }
+
+    private static function extract(Event $event): \Stripe\Product
+    {
+        /** @psalm-suppress UndefinedMagicPropertyFetch */
+        $obj = $event->data->object;
+        Assert::isInstanceOf($obj, \Stripe\Product::class);
+
+        return $obj;
+    }
+
+    public function handleStripeEvent(Event $event): void
+    {
+        match ($event->type) {
+            Event::PRODUCT_CREATED, Event::PRODUCT_UPDATED => $this->createOrUpdateProduct(self::extract($event)),
+            Event::PRODUCT_DELETED => $this->removeProduct(self::extract($event)),
+            default => null,
+        };
+    }
+
+    private function createOrUpdateProduct(\Stripe\Product $product): void
+    {
+        $this->createOrUpdate(new Product(
+            new ProductId($product->id),
+            $product->name,
+            $product->default_price ? new PriceId((string) $product->default_price) : null,
+            $product->active,
+            new \DateTimeImmutable('@' . $product->created),
+            $product->type, // TODO: this should be an enum
+            (string) $product->description,
+        ));
+    }
+
+    private function removeProduct(\Stripe\Product $product): void
+    {
+        $this->remove(new ProductId($product->id));
     }
 }

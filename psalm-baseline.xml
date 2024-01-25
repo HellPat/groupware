@@ -62,20 +62,25 @@
     zlib:8.3.2
   "
 >
-  <file src="src/Stripe/RemoteEventHandler.php">
-    <MixedMethodCall>
-      <code>__invoke</code>
-    </MixedMethodCall>
-  </file>
-  <file src="src/Stripe/UpdateProduct.php">
+  <file src="src/Stripe/MysqlProductRepository.php">
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$product->default_price]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
-  <file src="src/Stripe/UpdateSubscription.php">
+  <file src="src/Stripe/MysqlSubscriptionRepository.php">
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$subscription->cancel_at]]></code>
       <code><![CDATA[$subscription->canceled_at]]></code>
     </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Stripe/RemoteEventHandler.php">
+    <MixedMethodCall>
+      <code>handleStripeEvent</code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/Stripe/StripeEventAware.php">
+    <PossiblyUnusedMethod>
+      <code>handleStripeEvent</code>
+    </PossiblyUnusedMethod>
   </file>
 </files>
