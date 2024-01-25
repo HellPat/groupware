@@ -3,7 +3,7 @@
     # https://nix.dev/tutorials/first-steps/towards-reproducibility-pinning-nixpkgs#pinning-packages-with-urls-inside-a-nix-expression
     # Picking the commit can be done via https://status.nixos.org,
     # which lists all the releases and the latest commit that has passed all tests.
-    pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/d7f206b723e42edb09d9d753020a84b3061a79d8.tar.gz") {},
+    pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/854f4671883250e456dc1553c783ac9741a0e9a4.tar.gz") {},
     php ? pkgs.php83.buildEnv {
       extensions = ({ enabled, all }: enabled ++ (with all; [
           redis
@@ -59,6 +59,11 @@ pkgs.mkShell {
         export REDIS_DATADIR=''${PWD}/storage/redis/data
         export REDIS_PID=''${PWD}/.redis.pid
         export REDIS_SOCKET=''${PWD}/.redis.sock
+        export STRIPE_PROJECT_NAME=subscribe
+        export STRIPE_DEVICE_NAME=developer-''${DEVELOPER_NAME:-default}
+        # TODO: move secret to a vault
+        export STRIPE_API_KEY=sk_test_51IHFU3H5sb6o9949VJorc2HKKiXJ8Q5gh4cSKrRrvHmu2FRVoIYoHxygkUEji2WgKFgVpmYxHnV7WDjRLm3sUyIx00HIEjLSeh
+        source .env
         redis-server -v
         mysql --version
         git --version
