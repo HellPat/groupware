@@ -2,6 +2,7 @@
 	"packageManager": "pnpm@8.14.3",
 	"devDependencies": {
 		"cypress": "^13.6.3",
+		"cypress-recurse": "^1.35.2",
 		"stripe": "^14.13.0",
 		"ulid": "^2.3.0"
 	}
