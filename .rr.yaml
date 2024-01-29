@@ -1,32 +1,31 @@
-version: "3"
+version: '3'
 
 server:
-  command: "php public/index.php"
-  env:
-    - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
+    command: 'php public/index.php'
+    env:
+        - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
 
 http:
-  address: 0.0.0.0:8080
-  pool:
-    debug: false
-  middleware: [ "static", "gzip" ]
-  uploads:
-    forbid: [ ".php", ".exe", ".bat" ]
-  static:
-    dir: "public"
-    forbid: [ ".php", ".htaccess" ]
+    address: 0.0.0.0:8080
+    pool:
+        debug: false
+    middleware: ['static', 'gzip']
+    uploads:
+        forbid: ['.php', '.exe', '.bat']
+    static:
+        dir: 'public'
+        forbid: ['.php', '.htaccess']
 
 logs:
-  mode: production
-  channels:
-    http:
-      level: debug # Log all http requests, set to info to disable
-    server:
-      level: info # Everything written to worker stderr is logged
-      mode: raw
-    metrics:
-      level: error
-
+    mode: production
+    channels:
+        http:
+            level: debug # Log all http requests, set to info to disable
+        server:
+            level: info # Everything written to worker stderr is logged
+            mode: raw
+        metrics:
+            level: error
 # Uncomment to use metrics integration
 # rpc:
 #   listen: tcp://127.0.0.1:6001

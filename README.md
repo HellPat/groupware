@@ -4,9 +4,9 @@ A reference implementation that combines some best practices for building a mode
 
 ## Features
 
-- [x] nix-shell bases development environment
-- [x] e2e-Tests with Cypress
-- [x] asynchronous processing of incoming webhooks
+-   [x] nix-shell bases development environment
+-   [x] e2e-Tests with Cypress
+-   [x] asynchronous processing of incoming webhooks
 
 ## Installation
 

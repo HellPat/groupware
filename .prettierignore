@@ -1,0 +1,9 @@
+docker/
+storage/
+vendor/
+pnpm-lock.yaml
+var/
+public/assets/
+**/*.php
+**/*.cache
+**/*.lock
