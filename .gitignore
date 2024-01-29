@@ -52,3 +52,4 @@ storage/redis/data
 *.sock.lock
 *.pid
 node_modules/
+docker/
