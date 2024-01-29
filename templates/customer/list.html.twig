@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             {% for customer in customers %}
-                <tr>
+                <tr data-test-customer="{{ customer.id }}">
                     <td>{{ customer.id }}</td>
                     <td data-test-customer-email="{{ customer.email }}">{{ customer.email }}</td>
                     <td>{{ customer.name }}</td>

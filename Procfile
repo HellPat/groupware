@@ -4,10 +4,10 @@ mysql: mysqld --basedir=${MYSQL_HOME}/ --datadir=${MYSQL_DATADIR}/ --init-file=$
 redis: envsubst < storage/redis/redis.conf | redis-server -
 symfony: rr serve -p -c .rr.dev.yaml --debug
 
-# TODO: rethink limits and restarts.
+# TODO: rethink limits and restarts, when code changes, the process must be restarted.
 #       I set a time limit and a limit of jobs to process, to easy using xdebug.
 #       Xdebug listening must be started in the IDE, and the long running process must be restarted to take effect.
-symfony-message-consumer: bin/console messenger:consume async --limit=100 --time-limit=3000 --no-interaction -vv
+symfony-message-consumer: bin/console messenger:consume async --no-interaction -vv
 
 stripe: stripe listen --skip-verify --forward-to localhost:8000/webhook/stripe
 tailwindcss: tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css --watch
