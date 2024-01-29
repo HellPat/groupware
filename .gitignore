@@ -53,3 +53,4 @@ storage/redis/data
 *.pid
 node_modules/
 docker/
+cypress/screenshots/

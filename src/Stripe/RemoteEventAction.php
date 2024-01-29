@@ -2,6 +2,7 @@
 
 namespace App\Stripe;
 
+use Psr\Log\LoggerInterface;
 use Stripe\Exception\SignatureVerificationException;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,13 +21,19 @@ final readonly class RemoteEventAction
         #[\SensitiveParameter]
         private string              $secret,
         private MessageBusInterface $messageBus,
+        private LoggerInterface $logger,
     ) {
     }
 
     public function __invoke(Request $request): Response
     {
         try {
-            $this->messageBus->dispatch(RemoteEvent::fromRequest($request, $this->secret));
+            $event = RemoteEvent::fromRequest($request, $this->secret);
+            $this->logger->debug('Received Stripe event of type "{type}"', [
+                'type' => $event->type,
+                'event' => $event->payload
+            ]);
+            $this->messageBus->dispatch($event);
         } catch (SignatureVerificationException $e) {
             throw new BadRequestHttpException('Request does not match signature.', $e);
         }
