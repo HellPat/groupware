@@ -26,14 +26,13 @@ jobs:
                     - bin/console lint:xliff translations --no-interaction --format=github
                     - ./composer validate composer.json --no-check-publish
                     - symfony security:check
+                    - vendor/bin/rector --dry-run
+                    - vendor/bin/parallel-lint --exclude .git --exclude var --exclude vendor .
                     # TODO: add more ci-checks
                     #      bin/console lint:yaml *.yaml --parse-tags --no-interaction --format=github
-                    #      vendor/bin/parallel-lint src public migrations config
                     #      XDEBUG_MODE=off bin/composer-require-checker --no-interaction --config-file=$PWD/composer-require-checker.json
                     #      vendor/bin/config-transformer --dry-run
                     #      bin/console debug:translation --all --only-missing en
-                    #      vendor/bin/rector --dry-run
-                    #      vendor/bin/phpstan -v --memory-limit=1G {{ if output == "github" { "--error-format=github" } else { "" } }}
                     #      cd .. && pnpm spectral lint openapi.yaml {{ if output == "github" { "--format=github-actions" } else { "" } }
         steps:
             - uses: actions/checkout@v4

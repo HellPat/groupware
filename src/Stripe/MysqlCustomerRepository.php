@@ -76,6 +76,7 @@ final readonly class MysqlCustomerRepository implements StripeEventAware
         return $obj;
     }
 
+    #[\Override]
     public function handleStripeEvent(Event $event): void
     {
         match ($event->type) {
