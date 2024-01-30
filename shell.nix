@@ -31,7 +31,6 @@ pkgs.mkShell {
         pkgs.coreutils
         pkgs.overmind
         php
-        pkgs.php83Packages.composer
         pkgs.git
         pkgs.openssh
         pkgs.jq
@@ -63,6 +62,8 @@ pkgs.mkShell {
         export STRIPE_PROJECT_NAME=subscribe
         export STRIPE_DEVICE_NAME=developer-''${DEVELOPER_NAME:-default}
         source .env
+        # TODO: check why composer nix-package uses wrong php version
+        ./install-composer.sh
         redis-server -v
         mysql --version
         git --version
