@@ -18,7 +18,7 @@ setup-database:
 setup-backend:
     #!/usr/bin/env bash
     set -euxo pipefail
-    composer install --ignore-platform-req=ext-redis
+    ./composer install
     bin/console cache:warmup
 
 setup-frontend:

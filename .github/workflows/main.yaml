@@ -24,7 +24,7 @@ jobs:
                     - bin/console lint:twig templates --no-interaction --format=github
                     - bin/console lint:container --no-interaction
                     - bin/console lint:xliff translations --no-interaction --format=github
-                    - composer validate composer.json --no-check-publish
+                    - ./composer validate composer.json --no-check-publish
                     - symfony security:check
                     # TODO: add more ci-checks
                     #      bin/console lint:yaml *.yaml --parse-tags --no-interaction --format=github
