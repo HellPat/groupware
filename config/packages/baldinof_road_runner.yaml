@@ -20,7 +20,6 @@ baldinof_road_runner:
         #         type: counter
         #         help: Some help
 
-
     # You can use middlewares to manipulate Symfony requests & responses.
     # See https://github.com/baldinof/roadrunner-bundle#middlewares
     # middlewares:

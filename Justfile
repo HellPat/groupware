@@ -36,7 +36,9 @@ lint:
     vendor/bin/psalm
     vendor/bin/phpstan
     vendor/bin/ecs
+    pnpm exec prettier . --check
 
 fix:
     vendor/bin/ecs --fix
     just --fmt --unstable
+    pnpm exec prettier . --write
