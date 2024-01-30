@@ -7,9 +7,7 @@ import 'cypress-recurse/commands';
 // set your api key with an environment variable `CYPRESS_API_KEY` or configure using `env` property in config file
 // (cypress prefixes environment variables with CYPRESS)
 // const apiKey = Cypress.env('API_KEY')
-const stripe = new Stripe(
-    Cypress.env('STRIPE_API_KEY')
-);
+const stripe = new Stripe(Cypress.env('STRIPE_API_KEY'));
 
 describe('customers', () => {
     beforeEach(() => {

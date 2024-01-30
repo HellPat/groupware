@@ -24,6 +24,7 @@ setup-backend:
 setup-frontend:
     #!/usr/bin/env bash
     set -euxo pipefail
+    pnpm install --frozen-lockfile
     tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css
 
 setup-stripe:

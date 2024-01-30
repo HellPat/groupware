@@ -7,3 +7,4 @@ public/assets/
 **/*.php
 **/*.cache
 **/*.lock
+assets/styles/app.tailwind.css
