@@ -62,8 +62,6 @@ pkgs.mkShell {
         export REDIS_SOCKET=''${PWD}/.redis.sock
         export STRIPE_PROJECT_NAME=subscribe
         export STRIPE_DEVICE_NAME=developer-''${DEVELOPER_NAME:-default}
-        # TODO: move secret to a vault
-        export STRIPE_API_KEY=sk_test_51IHFU3H5sb6o9949VJorc2HKKiXJ8Q5gh4cSKrRrvHmu2FRVoIYoHxygkUEji2WgKFgVpmYxHnV7WDjRLm3sUyIx00HIEjLSeh
         source .env
         redis-server -v
         mysql --version

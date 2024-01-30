@@ -61,6 +61,8 @@ jobs:
 
     functional-tests:
         runs-on: ubuntu-latest
+        env:
+            STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
         steps:
             - uses: actions/checkout@v4
             - uses: cachix/install-nix-action@v25
@@ -76,10 +78,10 @@ jobs:
             # TODO: add cache for node_modules
             - name: Install dependencies
               run: pnpm install --frozen-lockfile --strict-peer-dependencies
-            - shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+            - shell: nix-shell --pure --keep STRIPE_API_KEY --run "bash -euxo pipefail {0}"
               run: just setup
-            - shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+            - shell: nix-shell --pure --keep STRIPE_API_KEY --run "bash -euxo pipefail {0}"
               run: just start-background
-            - shell: nix-shell --pure --run "bash -euxo pipefail {0}"
+            - shell: nix-shell --pure --keep STRIPE_API_KEY --run "bash -euxo pipefail {0}"
               run: bin/console doctrine:migrations:migrate --allow-no-migration --no-interaction
             - uses: cypress-io/github-action@v6

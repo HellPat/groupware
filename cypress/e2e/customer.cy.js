@@ -8,7 +8,7 @@ import 'cypress-recurse/commands';
 // (cypress prefixes environment variables with CYPRESS)
 // const apiKey = Cypress.env('API_KEY')
 const stripe = new Stripe(
-    'sk_test_51IHFU3H5sb6o9949VJorc2HKKiXJ8Q5gh4cSKrRrvHmu2FRVoIYoHxygkUEji2WgKFgVpmYxHnV7WDjRLm3sUyIx00HIEjLSeh',
+    Cypress.env('STRIPE_API_KEY')
 );
 
 describe('customers', () => {
