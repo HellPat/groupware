@@ -2,6 +2,7 @@
 
 namespace App\Stripe;
 
+use Doctrine\DBAL\Connection;
 use Stripe\Event;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -22,13 +23,14 @@ final readonly class RemoteEventHandler
          * @var iterable<StripeEventAware>
          */
         private iterable $handlers,
+        private Connection $connection,
     ) {
     }
 
     /**
      * @throws RecoverableExceptionInterface
      * @throws UnrecoverableExceptionInterface
-     * @throws \Exception
+     * @throws \Throwable
      */
     public function __invoke(RemoteEvent $message): void
     {
@@ -41,14 +43,20 @@ final readonly class RemoteEventHandler
             throw new UnrecoverableMessageHandlingException('Invalid JSON payload', 0, $e);
         }
 
-        foreach ($this->handlers as $handler) {
-            Assert::object($handler);
-            // TODO: Try out multiple handlers for RemoteEvent
-            //       Exceptions handling affects other handlers
-            //       When one handler throws recoverable / unrecoverable exception
-            //       all handlers are affected by the decision.
-            //       We should probably catch the exception and continue with the next handler.
-            $handler->handleStripeEvent($event);
-        }
+        $handlers = $this->handlers;
+        Assert::allIsInstanceOf($handlers, StripeEventAware::class);
+
+        /**
+         * All or nothing approach.
+         * When one handler fails, the whole transaction is rolled back.
+         * 
+         * TODO: consider handlers that modify state outside the database.
+         *       e.g. what happens when a handler updates a search index etc...
+         */
+        $this->connection->transactional(function () use ($event, $handlers) {
+            foreach ($handlers as $handler) {
+                $handler->handleStripeEvent($event);
+            }
+        });
     }
 }

@@ -73,14 +73,4 @@
       <code><![CDATA[$subscription->canceled_at]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
-  <file src="src/Stripe/RemoteEventHandler.php">
-    <MixedMethodCall>
-      <code>handleStripeEvent</code>
-    </MixedMethodCall>
-  </file>
-  <file src="src/Stripe/StripeEventAware.php">
-    <PossiblyUnusedMethod>
-      <code>handleStripeEvent</code>
-    </PossiblyUnusedMethod>
-  </file>
 </files>
