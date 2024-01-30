@@ -48,6 +48,7 @@ pkgs.mkShell {
         pkgs.hostname
         pkgs.redis
         pkgs.envsubst
+        pkgs.unzip
     ];
     
     shellHook = ''

@@ -16,6 +16,7 @@ abstract readonly class PrefixedId implements \Stringable
 
     abstract protected static function prefix(): string;
 
+    #[\Override]
     final public function __toString(): string
     {
         return $this->id;

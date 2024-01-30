@@ -38,8 +38,11 @@ lint:
     vendor/bin/phpstan
     vendor/bin/ecs
     pnpm exec prettier . --check
+    vendor/bin/rector --dry-run
+    vendor/bin/parallel-lint --exclude .git --exclude var --exclude vendor .
 
 fix:
     vendor/bin/ecs --fix
     just --fmt --unstable
     pnpm exec prettier . --write
+    vendor/bin/rector
