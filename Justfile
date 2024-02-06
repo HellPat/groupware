@@ -1,8 +1,11 @@
 start-background:
-    overmind start -D
+    nohup process-compose up -t=false > /dev/null 2>&1 &
+
+stop:
+    process-compose down
 
 develop:
-    overmind start
+    process-compose up
 
 setup:
     just setup-backend

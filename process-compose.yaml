@@ -1,0 +1,48 @@
+# @see https://f1bonacc1.github.io/process-compose/
+version: 0.5
+is_strict: true
+processes:
+    mysql:
+        command: mysqld --basedir=${MYSQL_HOME}/ --datadir=${MYSQL_DATADIR}/ --init-file=${MYSQL_HOME}/init.sql --skip-networking --default-time-zone=SYSTEM --log-error=${TMPDIR}/error.log --lc_messages_dir=${TMPDIR}/ --lc_messages=en_US --console
+    redis:
+        command: envsubst < storage/redis/redis.conf | redis-server -
+        readiness_probe:
+            command: redis-cli ping | grep PONG
+    symfony-roadrunner:
+        command: rr serve -p -c .rr.dev.yaml --debug
+        depends_on:
+            mysql:
+                condition: process_started
+            redis:
+                condition: process_started
+        readiness_probe:
+            http_get:
+                host: 127.0.0.1
+                scheme: http
+                path: '/.well-known/ready'
+                port: 8000
+    symfony-message-consumer:
+        command: symfony run --watch=config,src,templates,vendor bin/console messenger:consume async --limit=100 --time-limit=200 --no-interaction -vv
+        depends_on:
+            mysql:
+                condition: process_started
+            redis:
+                condition: process_started
+        availability:
+            restart: always
+
+    # Only needed for dev
+    stripe:
+        command: stripe listen --skip-verify --forward-to localhost:8000/webhook/stripe
+        depends_on:
+            symfony-roadrunner:
+                condition: process_healthy
+
+    # Debug environment variables
+    debug-env-variables:
+        command: env
+
+    # TODO: check how tailwind --watch works
+    #       We don't want to rely on a retry strategy
+    #tailwind-css:
+    #    command: tailwindcss -i assets/styles/app.css -o assets/styles/app.tailwind.css --watch
