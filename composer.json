@@ -108,6 +108,7 @@
         "phpunit/phpunit": "^10.0",
         "psalm/plugin-symfony": "^5.1",
         "rector/rector": "^1.0.0",
+        "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
         "symfony/debug-bundle": "7.0.*",
