@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Webmozart\Assert\Assert;
 
 /**
- * TODO: try out multiple handlers for RemoteEvent
+ * TODO: try out multiple handlers for RemoteEvent.
  */
 #[AsMessageHandler]
 final readonly class RemoteEventHandler
@@ -34,11 +34,10 @@ final readonly class RemoteEventHandler
      */
     public function __invoke(RemoteEvent $message): void
     {
-        
         try {
             $event = Event::constructFrom(
                 (array) json_decode($message->payload, true, 512, JSON_THROW_ON_ERROR)
-            );    
+            );
         } catch (\JsonException $e) {
             throw new UnrecoverableMessageHandlingException('Invalid JSON payload', 0, $e);
         }
@@ -46,10 +45,10 @@ final readonly class RemoteEventHandler
         $handlers = $this->handlers;
         Assert::allIsInstanceOf($handlers, StripeEventAware::class);
 
-        /**
+        /*
          * All or nothing approach.
          * When one handler fails, the whole transaction is rolled back.
-         * 
+         *
          * TODO: consider handlers that modify state outside the database.
          *       e.g. what happens when a handler updates a search index etc...
          */

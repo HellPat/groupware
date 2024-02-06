@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stripe;
@@ -13,8 +14,8 @@ interface StripeEventAware
 {
     /**
      * @throws UnrecoverableExceptionInterface If the event should not be retried
-     * @throws RecoverableExceptionInterface If the event should be retried forever
-     * @throws \Exception If the event should be retried according to the transport configuration
+     * @throws RecoverableExceptionInterface   If the event should be retried forever
+     * @throws \Exception                      If the event should be retried according to the transport configuration
      */
     public function handleStripeEvent(Event $event): void;
 }
