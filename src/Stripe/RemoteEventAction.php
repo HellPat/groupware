@@ -19,7 +19,7 @@ final readonly class RemoteEventAction
     public function __construct(
         #[Autowire(env: 'STRIPE_SIGNING_SECRET')]
         #[\SensitiveParameter]
-        private string              $secret,
+        private string $secret,
         private MessageBusInterface $messageBus,
         private LoggerInterface $logger,
     ) {
@@ -31,7 +31,7 @@ final readonly class RemoteEventAction
             $event = RemoteEvent::fromRequest($request, $this->secret);
             $this->logger->debug('Received Stripe event of type "{type}"', [
                 'type' => $event->type,
-                'event' => $event->payload
+                'event' => $event->payload,
             ]);
             $this->messageBus->dispatch($event);
         } catch (SignatureVerificationException $e) {
