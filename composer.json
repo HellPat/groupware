@@ -11,7 +11,7 @@
         "baldinof/roadrunner-bundle": "^3.0",
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
-        "doctrine/orm": "^2.17",
+        "doctrine/orm": "^3.0",
         "knplabs/knp-menu-bundle": "^3.3",
         "moneyphp/money": "^4.3",
         "phpdocumentor/reflection-docblock": "^5.3",
