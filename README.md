@@ -18,6 +18,6 @@ A reference implementation that combines some best practices for building a mode
 
 1. Clone this repository
 2. Run `nix-shell` in the root directory of this repository
-3. Run `just build`
+3. Run `just setup`
 4. Run `just start`
 5. Open http://localhost:8000

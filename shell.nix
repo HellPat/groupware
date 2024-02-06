@@ -29,7 +29,7 @@ pkgs.mkShell {
         pkgs.vim
         pkgs.which
         pkgs.coreutils
-        pkgs.overmind
+        pkgs.process-compose
         php
         pkgs.git
         pkgs.openssh
@@ -52,7 +52,6 @@ pkgs.mkShell {
     ];
     
     shellHook = ''
-        export OVERMIND_AUTO_RESTART=all
         export MYSQL_HOME=''${PWD}/storage/mysql
         export MYSQL_DATADIR=''${PWD}/storage/mysql/data
         export MYSQL_UNIX_PORT=''${PWD}/.mysql.sock
@@ -62,9 +61,16 @@ pkgs.mkShell {
         export REDIS_SOCKET=''${PWD}/.redis.sock
         export STRIPE_PROJECT_NAME=subscribe
         export STRIPE_DEVICE_NAME=developer-''${DEVELOPER_NAME:-default}
-        source .env
+        
+        # Symfony Config
+        export DATABASE_URL="mysql://user:pass@localhost/app?unix_socket=''${MYSQL_UNIX_PORT}&serverVersion=8.0.35&charset=utf8"
+        export MESSENGER_TRANSPORT_DSN=redis://''${REDIS_SOCKET}?stream=messages
+        export APP_ENV=dev
+        export APP_SECRET=aebd59d3c9b54539553c1ea79045c817
+        
         # TODO: check why composer nix-package uses wrong php version
         ./install-composer.sh
+        
         redis-server -v
         mysql --version
         git --version
