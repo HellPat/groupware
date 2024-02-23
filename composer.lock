@@ -12425,16 +12425,16 @@
         },
         {
             "name": "symplify/easy-coding-standard",
-            "version": "12.1.12",
+            "version": "12.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/easy-coding-standard/easy-coding-standard.git",
-                "reference": "d87f15506b5200a0098076cdbf6d00913b4e41f5"
+                "reference": "8aa33fe47837423f7515a1f5d18a54ca31e9ac2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/d87f15506b5200a0098076cdbf6d00913b4e41f5",
-                "reference": "d87f15506b5200a0098076cdbf6d00913b4e41f5",
+                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/8aa33fe47837423f7515a1f5d18a54ca31e9ac2c",
+                "reference": "8aa33fe47837423f7515a1f5d18a54ca31e9ac2c",
                 "shasum": ""
             },
             "require": {
@@ -12467,7 +12467,7 @@
             ],
             "support": {
                 "issues": "https://github.com/easy-coding-standard/easy-coding-standard/issues",
-                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.1.12"
+                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.1.13"
             },
             "funding": [
                 {
@@ -12479,7 +12479,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-14T10:04:06+00:00"
+            "time": "2024-02-23T09:15:43+00:00"
         },
         {
             "name": "theseer/tokenizer",
