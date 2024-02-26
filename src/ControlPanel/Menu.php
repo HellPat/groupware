@@ -21,8 +21,10 @@ final readonly class Menu
         $menu = $this->factory->createItem('root', $options);
 
         $menu->addChild('menu.dashboard', ['route' => DashboardAction::class]);
-        $menu->addChild('menu.customers', ['route' => CustomerListAction::class]);
-        $menu->addChild('menu.products', ['route' => ProductListAction::class]);
+        
+        $management = $menu->addChild('menu.management', ['route' => DashboardAction::class]);
+        $management->addChild('menu.customers', ['route' => 'customer_list', 'routes' => ['customer_list']]);
+        $management->addChild('menu.products', ['route' => ProductListAction::class]);
 
         return $menu;
     }
