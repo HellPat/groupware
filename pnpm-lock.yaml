@@ -16,7 +16,7 @@ devDependencies:
     version: 3.2.5
   stripe:
     specifier: ^14.13.0
-    version: 14.21.0
+    version: 14.22.0
   ulid:
     specifier: ^2.3.0
     version: 2.3.0
@@ -63,9 +63,8 @@ packages:
       - supports-color
     dev: true
 
-  /@types/node@20.11.27:
-    resolution: {integrity: sha512-qyUZfMnCg1KEz57r7pzFtSGt49f6RPkPBis3Vo4PbS7roQEDn22hiHzl/Lo1q4i4hDEgBJmBF/NTNg2XR0HbFg==}
-    requiresBuild: true
+  /@types/node@20.11.30:
+    resolution: {integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -82,7 +81,7 @@ packages:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
     requiresBuild: true
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.30
     dev: true
     optional: true
 
@@ -1056,11 +1055,11 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /stripe@14.21.0:
-    resolution: {integrity: sha512-PFmpl35Myn6UDdVLTHcuppdbkPVvlQfkMHOmgGZh5QOdSUxVmvz090Z4obLg8ta1MNs1PNpzr9i7E39iAIv07A==}
+  /stripe@14.22.0:
+    resolution: {integrity: sha512-Pj8SAdTNjMq42UnWzBTTy8KMQ8qbQoVemPHbw3x+rHvwq1Psg9UFPT58j54F5os/SCgUAOZSEMcUedvzIDuqvw==}
     engines: {node: '>=12.*'}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.30
       qs: 6.12.0
     dev: true
 
