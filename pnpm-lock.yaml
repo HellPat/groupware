@@ -16,7 +16,7 @@ devDependencies:
     version: 3.2.5
   stripe:
     specifier: ^15.0.0
-    version: 15.0.0
+    version: 15.1.0
   ulid:
     specifier: ^2.3.0
     version: 2.3.0
@@ -1055,8 +1055,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /stripe@15.0.0:
-    resolution: {integrity: sha512-QQ9JiLcKoGKT1/N0Ta5AsePGtdJejkKTWS9fnRWk9Z1Bcr6fiFkcdtlJwOg/hAQaDvXOB8cNc6J+UqXzH8ePCw==}
+  /stripe@15.1.0:
+    resolution: {integrity: sha512-yMsP9VWsQKkmR14E7MhtFDYKCoYCnhG/tLtiMnNiSiVisDezU2OKJ2T9myufYKl922H85nvCgaczyBLovaJTVA==}
     engines: {node: '>=12.*'}
     dependencies:
       '@types/node': 20.12.7
