@@ -10,7 +10,7 @@ importers:
     devDependencies:
       cypress:
         specifier: ^13.6.3
-        version: 13.7.3
+        version: 13.8.0
       cypress-recurse:
         specifier: ^1.35.2
         version: 1.35.3
@@ -188,8 +188,8 @@ packages:
   cypress-recurse@1.35.3:
     resolution: {integrity: sha512-NbFOpEuZT4tFqAB0jQqel7WtVNDe8pvSHE2TfXvYk4pspf3wq98OC2RhhLn3bMnoCnPtY4IHO7e37c+CZ9HnMA==}
 
-  cypress@13.7.3:
-    resolution: {integrity: sha512-uoecY6FTCAuIEqLUYkTrxamDBjMHTYak/1O7jtgwboHiTnS1NaMOoR08KcTrbRZFCBvYOiS4tEkQRmsV+xcrag==}
+  cypress@13.8.0:
+    resolution: {integrity: sha512-Qau//mtrwEGOU9cn2YjavECKyDUwBh8J2tit+y9s1wsv6C3BX+rlv6I9afmQnL8PmEEzJ6be7nppMHacFzZkTw==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -863,7 +863,7 @@ snapshots:
     dependencies:
       humanize-duration: 3.32.0
 
-  cypress@13.7.3:
+  cypress@13.8.0:
     dependencies:
       '@cypress/request': 3.0.1
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
