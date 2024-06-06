@@ -19,7 +19,7 @@ importers:
         version: 3.3.1
       stripe:
         specifier: ^15.0.0
-        version: 15.9.0
+        version: 15.10.0
       ulid:
         specifier: ^2.3.0
         version: 2.3.0
@@ -37,11 +37,11 @@ packages:
   '@cypress/xvfb@1.2.4':
     resolution: {integrity: sha512-skbBzPggOVYCbnGgV+0dmBdW/s77ZkAOXIC1knS8NagwDjBrNC1LuXtQJeiN6l+m7lzmHtaoUw/ctJKdqkG57Q==}
 
-  '@types/node@20.14.0':
-    resolution: {integrity: sha512-5cHBxFGJx6L4s56Bubp4fglrEpmyJypsqI6RgzMfBHWUJQGWAAi8cWcgetEbZXHYXo9C2Fa4EEds/uSyS4cxmA==}
-
   '@types/node@20.14.1':
     resolution: {integrity: sha512-T2MzSGEu+ysB/FkWfqmhV3PLyQlowdptmmgD20C6QxsS8Fmv5SjpZ1ayXaEC0S21/h5UJ9iA6W/5vSNU5l00OA==}
+
+  '@types/node@20.14.2':
+    resolution: {integrity: sha512-xyu6WAMVwv6AKFLB+e/7ySZVr/0zLCzOa7rSpq6jNwpqOrUbcACDWC+53d4n2QHOnDou0fbIsg8wZu/sxrnI4Q==}
 
   '@types/sinonjs__fake-timers@8.1.1':
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
@@ -605,8 +605,8 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
 
-  stripe@15.9.0:
-    resolution: {integrity: sha512-C7NAK17wGr6DOybxThO0n1zVcqSShWno7kx/UcJorQ/nWZ5KnfHQ38DUTb9NgizC8TCII3BPIhqq6Zc/1aUkrg==}
+  stripe@15.10.0:
+    resolution: {integrity: sha512-yM2967TDiNhmPE69R61Btx7URgRJOjAoLRvAa0dUyF5qfDMjDh4Qolr/FaZigxUzBH5/8SphkHpNS4Ie2L5RYg==}
     engines: {node: '>=12.*'}
 
   supports-color@7.2.0:
@@ -726,14 +726,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@types/node@20.14.0':
-    dependencies:
-      undici-types: 5.26.5
-
   '@types/node@20.14.1':
     dependencies:
       undici-types: 5.26.5
     optional: true
+
+  '@types/node@20.14.2':
+    dependencies:
+      undici-types: 5.26.5
 
   '@types/sinonjs__fake-timers@8.1.1': {}
 
@@ -1303,9 +1303,9 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
-  stripe@15.9.0:
+  stripe@15.10.0:
     dependencies:
-      '@types/node': 20.14.0
+      '@types/node': 20.14.2
       qs: 6.12.1
 
   supports-color@7.2.0:
