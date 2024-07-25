@@ -19,7 +19,7 @@ importers:
         version: 3.3.3
       stripe:
         specifier: ^16.0.0
-        version: 16.4.0
+        version: 16.5.0
       ulid:
         specifier: ^2.3.0
         version: 2.3.0
@@ -603,8 +603,8 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
 
-  stripe@16.4.0:
-    resolution: {integrity: sha512-rFIcDJaF+z28BsR4GXoy0YhAjE24D0AymJRsrAS0YbQAIJi0gOO/4mctbhNzrySS+bLVJOQLefdblDQMMNm58Q==}
+  stripe@16.5.0:
+    resolution: {integrity: sha512-5qY2Va8pmnqS/dcKsQKJnk9kkYCtS6hqjN7kktZEmdxVohZHvbT9pOWK8UUKRInTXYkCNl6x505tO5416KLPsQ==}
     engines: {node: '>=12.*'}
 
   supports-color@7.2.0:
@@ -1296,7 +1296,7 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
-  stripe@16.4.0:
+  stripe@16.5.0:
     dependencies:
       '@types/node': 20.14.12
       qs: 6.12.3
