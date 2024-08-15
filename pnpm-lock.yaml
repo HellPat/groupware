@@ -19,7 +19,7 @@ importers:
         version: 3.3.3
       stripe:
         specifier: ^16.0.0
-        version: 16.7.0
+        version: 16.8.0
       ulid:
         specifier: ^2.3.0
         version: 2.3.0
@@ -36,9 +36,6 @@ packages:
 
   '@cypress/xvfb@1.2.4':
     resolution: {integrity: sha512-skbBzPggOVYCbnGgV+0dmBdW/s77ZkAOXIC1knS8NagwDjBrNC1LuXtQJeiN6l+m7lzmHtaoUw/ctJKdqkG57Q==}
-
-  '@types/node@22.1.0':
-    resolution: {integrity: sha512-AOmuRF0R2/5j1knA3c6G3HOk523Ga+l+ZXltX8SF1+5oqcXijjfTd8fY3XRZqSihEu9XhtQnKYLmkFaoxgsJHw==}
 
   '@types/node@22.3.0':
     resolution: {integrity: sha512-nrWpWVaDZuaVc5X84xJ0vNrLvomM205oQyLsRt7OHNZbSHslcWsvgFR7O7hire2ZonjLrWBbedmotmIlJDVd6g==}
@@ -606,8 +603,8 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
 
-  stripe@16.7.0:
-    resolution: {integrity: sha512-BJCSEtqN8LJsPuPkjQmB/LlBl00uxi9FIPa6LNcF80ofMKqfnuervDhwWSZqCs6xJk/i9vx1D9lRoDnqSmym2w==}
+  stripe@16.8.0:
+    resolution: {integrity: sha512-6rOIcGOkxcc29jvhEyOYmpPFilekOBV+7vpemAoIAfbtCRW1yxzdDGM0/0vyekHglLL+wqGpP5ldrhO3dJ2JEQ==}
     engines: {node: '>=12.*'}
 
   supports-color@7.2.0:
@@ -648,9 +645,6 @@ packages:
   ulid@2.3.0:
     resolution: {integrity: sha512-keqHubrlpvT6G2wH0OEfSW4mquYRcbe/J8NMmveoQOjUqmo+hXtO+ORCpWhdbZ7k72UtY61BL7haGxW6enBnjw==}
     hasBin: true
-
-  undici-types@6.13.0:
-    resolution: {integrity: sha512-xtFJHudx8S2DSoujjMd1WeWvn7KKWFRESZTMeL1RptAYERu29D6jphMjjY+vn96jvN3kVPDNxU/E13VTaXj6jg==}
 
   undici-types@6.18.2:
     resolution: {integrity: sha512-5ruQbENj95yDYJNS3TvcaxPMshV7aizdv/hWYjGIKoANWKjhWNBsr2YEuYZKodQulB1b8l7ILOuDQep3afowQQ==}
@@ -730,14 +724,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@types/node@22.1.0':
-    dependencies:
-      undici-types: 6.13.0
-
   '@types/node@22.3.0':
     dependencies:
       undici-types: 6.18.2
-    optional: true
 
   '@types/sinonjs__fake-timers@8.1.1': {}
 
@@ -1307,9 +1296,9 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
-  stripe@16.7.0:
+  stripe@16.8.0:
     dependencies:
-      '@types/node': 22.1.0
+      '@types/node': 22.3.0
       qs: 6.13.0
 
   supports-color@7.2.0:
@@ -1345,10 +1334,7 @@ snapshots:
 
   ulid@2.3.0: {}
 
-  undici-types@6.13.0: {}
-
-  undici-types@6.18.2:
-    optional: true
+  undici-types@6.18.2: {}
 
   universalify@0.2.0: {}
 
