@@ -10,7 +10,7 @@ importers:
     devDependencies:
       cypress:
         specifier: ^13.6.3
-        version: 13.14.1
+        version: 13.14.2
       cypress-recurse:
         specifier: ^1.35.2
         version: 1.35.3
@@ -39,6 +39,9 @@ packages:
 
   '@types/node@22.5.1':
     resolution: {integrity: sha512-KkHsxej0j9IW1KKOOAA/XBA0z08UFSrRQHErzEfA3Vgq57eXIMYboIlHJuYIfd+lwCQjtKqUu3UnmKbtUc9yRw==}
+
+  '@types/node@22.5.3':
+    resolution: {integrity: sha512-njripolh85IA9SQGTAqbmnNZTdxv7X/4OYGPz8tgy5JDr8MP+uDBa921GpYEoDDnwm0Hmn5ZPeJgiiSTPoOzkQ==}
 
   '@types/sinonjs__fake-timers@8.1.1':
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
@@ -188,8 +191,8 @@ packages:
   cypress-recurse@1.35.3:
     resolution: {integrity: sha512-NbFOpEuZT4tFqAB0jQqel7WtVNDe8pvSHE2TfXvYk4pspf3wq98OC2RhhLn3bMnoCnPtY4IHO7e37c+CZ9HnMA==}
 
-  cypress@13.14.1:
-    resolution: {integrity: sha512-Wo+byPmjps66hACEH5udhXINEiN3qS3jWNGRzJOjrRJF3D0+YrcP2LVB1T7oYaVQM/S+eanqEvBWYc8cf7Vcbg==}
+  cypress@13.14.2:
+    resolution: {integrity: sha512-lsiQrN17vHMB2fnvxIrKLAjOr9bPwsNbPZNrWf99s4u+DVmCY6U+w7O3GGG9FvP4EUVYaDu+guWeNLiUzBrqvA==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -728,13 +731,18 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
+  '@types/node@22.5.3':
+    dependencies:
+      undici-types: 6.19.8
+    optional: true
+
   '@types/sinonjs__fake-timers@8.1.1': {}
 
   '@types/sizzle@2.3.8': {}
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 22.5.1
+      '@types/node': 22.5.3
     optional: true
 
   aggregate-error@3.1.0:
@@ -857,7 +865,7 @@ snapshots:
     dependencies:
       humanize-duration: 3.32.0
 
-  cypress@13.14.1:
+  cypress@13.14.2:
     dependencies:
       '@cypress/request': 3.0.1
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
