@@ -19,7 +19,7 @@ importers:
         version: 3.3.3
       stripe:
         specifier: ^16.0.0
-        version: 16.11.0
+        version: 16.12.0
       ulid:
         specifier: ^2.3.0
         version: 2.3.0
@@ -39,6 +39,9 @@ packages:
 
   '@types/node@22.5.4':
     resolution: {integrity: sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==}
+
+  '@types/node@22.5.5':
+    resolution: {integrity: sha512-Xjs4y5UPO/CLdzpgR6GirZJx36yScjh73+2NlLlkFRSoQN8B0DpfXPdZGnvVmLRLOsqDpOfTNv7D9trgGhmOIA==}
 
   '@types/sinonjs__fake-timers@8.1.1':
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
@@ -603,8 +606,8 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
 
-  stripe@16.11.0:
-    resolution: {integrity: sha512-Rl4S2UAU/uWr3diETk3wkpXSe7LBPJ4BdXRzto5XVGGUhvLi8Q0MShwI5yhPH6Cdv2kmLu/Yl14QMlHgeRp7Qw==}
+  stripe@16.12.0:
+    resolution: {integrity: sha512-H7eFVLDxeTNNSn4JTRfL2//LzCbDrMSZ+2q1c7CanVWgK2qIW5TwS+0V7N9KcKZZNpYh/uCqK0PyZh/2UsaAtQ==}
     engines: {node: '>=12.*'}
 
   supports-color@7.2.0:
@@ -725,6 +728,11 @@ snapshots:
       - supports-color
 
   '@types/node@22.5.4':
+    dependencies:
+      undici-types: 6.19.8
+    optional: true
+
+  '@types/node@22.5.5':
     dependencies:
       undici-types: 6.19.8
 
@@ -1296,9 +1304,9 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
-  stripe@16.11.0:
+  stripe@16.12.0:
     dependencies:
-      '@types/node': 22.5.4
+      '@types/node': 22.5.5
       qs: 6.13.0
 
   supports-color@7.2.0:
