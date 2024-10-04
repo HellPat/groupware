@@ -19,7 +19,7 @@ importers:
         version: 3.3.3
       stripe:
         specifier: ^17.0.0
-        version: 17.0.0
+        version: 17.1.0
       ulid:
         specifier: ^2.3.0
         version: 2.3.0
@@ -37,8 +37,8 @@ packages:
   '@cypress/xvfb@1.2.4':
     resolution: {integrity: sha512-skbBzPggOVYCbnGgV+0dmBdW/s77ZkAOXIC1knS8NagwDjBrNC1LuXtQJeiN6l+m7lzmHtaoUw/ctJKdqkG57Q==}
 
-  '@types/node@22.7.1':
-    resolution: {integrity: sha512-adOMRLVmleuWs/5V/w5/l7o0chDK/az+5ncCsIapTKogsu/3MVWvSgP58qVTXi5IwpfGt8pMobNq9rOWtJyu5Q==}
+  '@types/node@22.7.4':
+    resolution: {integrity: sha512-y+NPi1rFzDs1NdQHHToqeiX2TIS79SWEAw9GYhkkx8bD0ChpfqC+n2j5OXOCpzfojBEBt6DnEnnG9MY0zk1XLg==}
 
   '@types/sinonjs__fake-timers@8.1.1':
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
@@ -596,8 +596,8 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
 
-  stripe@17.0.0:
-    resolution: {integrity: sha512-URKpnjH2O+OWxhvXLIaEIaAkp2fQvqITm/3zJS0a3nGCREjH3qJYxmGowngA46Qu1x2MumNL3Y/OdY6uzIhpCQ==}
+  stripe@17.1.0:
+    resolution: {integrity: sha512-sNRsJx7LPP2Gg6cBJoHJqhr+UoBVZZRes2BDqbrg+1FDBxJc4Yn+LkrpJ/VnL3XQ3+6I5GrOUnSSFfE/joDFjw==}
     engines: {node: '>=12.*'}
 
   supports-color@7.2.0:
@@ -717,7 +717,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@types/node@22.7.1':
+  '@types/node@22.7.4':
     dependencies:
       undici-types: 6.19.8
 
@@ -727,7 +727,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 22.7.1
+      '@types/node': 22.7.4
     optional: true
 
   aggregate-error@3.1.0:
@@ -1283,9 +1283,9 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
-  stripe@17.0.0:
+  stripe@17.1.0:
     dependencies:
-      '@types/node': 22.7.1
+      '@types/node': 22.7.4
       qs: 6.13.0
 
   supports-color@7.2.0:
