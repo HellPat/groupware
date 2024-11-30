@@ -12,17 +12,23 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body class="bg-slate-300">
+    <body class="bg-slate-300 leading-7">
         <header>
             Header
         </header>
-        <nav>
-            {{ knp_menu_render('main', {'depth': 2, 'currentAsLink': false}) }}
-        </nav>
-        {% block body %}
-            <main>
-                {% block main %}{% endblock %}
-            </main>
-        {% endblock %}
+        <div class="flex mx-auto max-w-7xl">
+            <nav>
+                {{ knp_menu_render('main', {
+                    'template': '_menu.html.twig',
+                    'currentAsLink': false,
+                }) }}
+            </nav>
+            {% block body %}
+                <main class="flex-1 bg-white">
+                    <h1 class="text-2xl">{% block headline %}{% endblock %}</h1>
+                    {% block main %}{% endblock %}
+                </main>
+            {% endblock %}
+        </div>
     </body>
 </html>

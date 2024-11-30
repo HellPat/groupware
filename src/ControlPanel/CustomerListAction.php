@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/customers')]
+#[Route('/customers', name: 'customer_list')]
 final class CustomerListAction extends AbstractController
 {
     public function __invoke(MysqlCustomerRepository $customers): Response
